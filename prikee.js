@@ -82,7 +82,7 @@ app.get('/sign', async (req, res) => {
 
 app.post("/parties",  async (req, res) => {
   const { name,category, mobilenumber, party_type, balance,email,
-  gst, pannumber, billingaddress } = req.body;
+  gst, pannumber, billingaddress, shippingaddress } = req.body;
 
   const data = {
       name:name,
@@ -93,8 +93,8 @@ app.post("/parties",  async (req, res) => {
       balance:balance,
       gst:gst,
       pannumber:pannumber,
-      billingaddress:billingaddress
-      
+      billingaddress:billingaddress,
+      shippingaddress:shippingaddress
   };
 
   try {

@@ -33,6 +33,9 @@ const partiesSchema = new mongoose.Schema(
       billingaddress:{
         type:String
       },
+      shippingaddress:{
+        type:String
+      },
       email:{
         type:String
       }

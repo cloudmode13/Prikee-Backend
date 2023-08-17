@@ -81,37 +81,64 @@ app.get('/sign', async (req, res) => {
 // app.use('/parties', partiesRoute)
 
 app.post("/parties",  async (req, res) => {
-  const { name,category, mobilenumber, party_type, balance } = req.body;
+  const { name,category, mobilenumber, party_type, balance,email,
+  gst, pannumber, billingaddress } = req.body;
 
   const data = {
       name:name,
       category:category,
       mobilenumber:mobilenumber,
+      email:email,
       party_type:party_type,
       balance:balance,
+      gst:gst,
+      pannumber:pannumber,
+      billingaddress:billingaddress
+      
   };
 
   try {
     const parties = await Parties.create(data);
-    console.log(104,parties);
+    console.log(104, parties);
     if (parties) {
-      res.send({ data: parties });
+      res.status(201).send({ message: "Party created successfully", data: parties });
     } else {
-      res.send({ message: "not ok" });
+      res.status(400).send({ message: "Party creation failed" });
     }
+  } catch (e) {
+    console.log(e);
+
+  }
+  
+});
+
+app.get("/partiesData", async (req, res) => {
+  try {
+    const parties = await Parties.find({});
+    res.send({ data: parties });
+    console.log(1, parties);
   } catch (e) {
     console.log(e);
   }
 });
 
-app.get("/partiesData", async (req, res) => {
+
+app.delete("/partiesData/:_id", async (req, res) => {
+  console.log(req.params._id);
+
   try {
-    const partiesData = await Parties.find({});
-    res.send({ data: partiesData });
-    console.log(1, partiesData);
+    const parties = await Parties.findByIdAndDelete(req.params._id);
+
+    if (!parties) {
+      res.send({ message: "error" });
+    } else {
+     
+      res.send({ message: "Successfully delete" });
+
+    }
   } catch (e) {
     console.log(e);
-  }
+  } 
 });
 
 app.get("/", (req, res) => {

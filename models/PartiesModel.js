@@ -38,7 +38,14 @@ const partiesSchema = new mongoose.Schema(
       },
       email:{
         type:String
+      },
+      creditperiod:{
+        type:String
+      },
+      creditlimit:{
+        type:String
       }
+
      
   }
  

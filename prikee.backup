@@ -10,8 +10,6 @@ import _ from 'lodash'
 import otpGenerator from 'otp-generator'
 import Parties from './models/PartiesModel.js'
 
-import CreateCategory from "./models/CreateCategory.js";
-
 
 
 const app = express();
@@ -84,7 +82,7 @@ app.get('/sign', async (req, res) => {
 
 app.post("/parties",  async (req, res) => {
   const { name,category, mobilenumber, party_type, balance,email,
-  gst, pannumber, billingaddress,shippingaddress,creditperiod,creditlimit } = req.body;
+  gst, pannumber, billingaddress, shippingaddress } = req.body;
 
   const data = {
       name:name,
@@ -96,10 +94,7 @@ app.post("/parties",  async (req, res) => {
       gst:gst,
       pannumber:pannumber,
       billingaddress:billingaddress,
-      shippingaddress:shippingaddress,
-      creditperiod:creditperiod,
-      creditlimit:creditlimit
-      
+      shippingaddress:shippingaddress
   };
 
   try {
@@ -128,63 +123,23 @@ app.get("/partiesData", async (req, res) => {
 });
 
 
-app.delete("/partiesData/:id", async (req, res) => {
-  console.log(req.params.id);
+app.delete("/partiesData/:_id", async (req, res) => {
+  console.log(req.params._id);
 
   try {
-    const deletedParty = await Parties.findByIdAndDelete(req.params.id);
+    const parties = await Parties.findByIdAndDelete(req.params._id);
 
-    if (!deletedParty) {
-      return res.status(404).send({ message: "Party not found" });
-    }
-
-    return res.status(200).send({ message: "Successfully deleted" });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send({ message: "Server error" });
-  }
-});
-
-
-app.put("/partiesData/:id", async (req, res) => {
-  try {
-    const updatedParty = await Parties.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    console.log('hello'+ updatedParty);
-    if (!updatedParty) {
-      return res.status(404).send({ message: "Party not found" });
-    }
-
-    return res.status(200).send({ message: "Successfully updated", data: updatedParty });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send({ message: "Server error" });
-  }
-});
-
-
-app.post("/createCatogry",  async (req, res) => {
-  const { categoryName} = req.body;
-
-  const data = {
-    categoryName:categoryName,  
-  };
-
-  try {
-    const createCategory = await CreateCategory.create(data);
-    console.log(104, createCategory);
-    if (createCategory) {
-      res.status(201).send({ message: "Party created successfully", data: createCategory });
+    if (!parties) {
+      res.send({ message: "error" });
     } else {
-      res.status(400).send({ message: "Party creation failed" });
+     
+      res.send({ message: "Successfully delete" });
+
     }
   } catch (e) {
     console.log(e);
-
-  }
+  } 
 });
-
-
-
 
 app.get("/", (req, res) => {
     console.log("hello cloud");

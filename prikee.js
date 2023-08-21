@@ -81,36 +81,81 @@ app.get('/sign', async (req, res) => {
 // app.use('/parties', partiesRoute)
 
 app.post("/parties",  async (req, res) => {
-  const { name,category, mobilenumber, party_type, balance } = req.body;
+  const { name,category, mobilenumber, party_type, balance,email,
+  gst, pannumber, billingaddress,shippingaddress,creditperiod,creditlimit } = req.body;
 
   const data = {
       name:name,
       category:category,
       mobilenumber:mobilenumber,
+      email:email,
       party_type:party_type,
       balance:balance,
+      gst:gst,
+      pannumber:pannumber,
+      billingaddress:billingaddress,
+      shippingaddress:shippingaddress,
+      creditperiod:creditperiod,
+      creditlimit:creditlimit
+      
   };
 
   try {
     const parties = await Parties.create(data);
-    console.log(104,parties);
+    console.log(104, parties);
     if (parties) {
-      res.send({ data: parties });
+      res.status(201).send({ message: "Party created successfully", data: parties });
     } else {
-      res.send({ message: "not ok" });
+      res.status(400).send({ message: "Party creation failed" });
     }
+  } catch (e) {
+    console.log(e);
+
+  }
+  
+});
+
+app.get("/partiesData", async (req, res) => {
+  try {
+    const parties = await Parties.find({});
+    res.send({ data: parties });
+    console.log(1, parties);
   } catch (e) {
     console.log(e);
   }
 });
 
-app.get("/partiesData", async (req, res) => {
+
+app.delete("/partiesData/:id", async (req, res) => {
+  console.log(req.params.id);
+
   try {
-    const partiesData = await Parties.find({});
-    res.send({ data: partiesData });
-    console.log(1, partiesData);
-  } catch (e) {
-    console.log(e);
+    const deletedParty = await Parties.findByIdAndDelete(req.params.id);
+
+    if (!deletedParty) {
+      return res.status(404).send({ message: "Party not found" });
+    }
+
+    return res.status(200).send({ message: "Successfully deleted" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ message: "Server error" });
+  }
+});
+
+
+app.put("/partiesData/:id", async (req, res) => {
+  try {
+    const updatedParty = await Parties.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    console.log('hello'+ updatedParty);
+    if (!updatedParty) {
+      return res.status(404).send({ message: "Party not found" });
+    }
+
+    return res.status(200).send({ message: "Successfully updated", data: updatedParty });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ message: "Server error" });
   }
 });
 

@@ -1,28 +1,10 @@
 import express from 'express'
-import CreateCategory from '../models/CreateCategory';
+import { handleCatagoryPost, handleCatagoryGet } from '../controllers/createCategory.js';
 const router = express.Router()
 
 
-router.post("/createCategory",  async (req, res) => {
-    const { name, } = req.body;
+router.post("/",handleCatagoryPost);
   
-    const data = {
-        name:name
-    };
-  
-    try {
-      const createCategory = await CreateCategory.create(data);
-      console.log(104,createCategory);
-      if (createCategory) {
-        res.send({ data: createCategory });
-      } else {
-        res.send({ message: "not ok" });
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  });
-  
-
+router.get("/", handleCatagoryGet)
 
  export default router;

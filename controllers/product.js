@@ -15,7 +15,7 @@ export async function handleProductPost(req, res) {
                 date:date}],
                 pricingDetails:[{salesPrice:salesPrice,purchasePrice:purchasePrice,hsnCode:hsnCode,gst:gst,}] 
         };
-      
+        
         try {
           const productItem = await Product.create(data);
           console.log(104, productItem);
@@ -26,9 +26,7 @@ export async function handleProductPost(req, res) {
           }
         } catch (e) {
           console.log(e);
-      
         }
-   
   }
 
 

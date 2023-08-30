@@ -8,9 +8,12 @@ dotenv.config();
 import bcrypt from 'bcrypt'
 import _ from 'lodash'
 import partiesRouter from './routes/partiesRoute.js'
-// import createCategoryRouter from './routes/createCategory.js'
+import createCategoryRouter from './routes/createCategory.js'
 import productRouter from "./routes/product.js"
-import CreateCategory from "./models/CreateCategory.js";
+import createInvtRouter from "./routes/categoryInventory.js";
+import othersInvtRouter from './routes/othersInventory.js'
+
+
 
 
 const app = express();
@@ -40,38 +43,13 @@ mongoose
   app.use('/parties', partiesRouter)
 
   
-  // app.use('/createCategory', createCategoryRouter)
+  app.use('/createCategory', createCategoryRouter)
 
   app.use('/product', productRouter)
 
+  app.use('/categoryInvt', createInvtRouter)
 
-  app.post('/create', (req, res) => {
-const {categoryName} = req.body
-
-const data = {categoryName:categoryName}
-
-try {
-  const create = CreateCategory.create(data)
-  if(create)
-   res.status(200).send({msg:'create successfully', data:data})
-  else
-  res.status(400).send({msg:'error'})
-} catch (error) {
-  console.log(error)
-}
-  })
-
-
-  app.get("/create", async (req, res) => {
-    try {
-      const create = await CreateCategory.find({});
-      res.send({ data: create });
-      console.log(1, create);
-    } catch (e) {
-      console.log(e);
-    }
-  });
-
+  app.use('/othersInvt', othersInvtRouter)
 
 app.get("/", (req, res) => {
     console.log("hello cloud");

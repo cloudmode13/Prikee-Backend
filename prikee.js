@@ -12,6 +12,7 @@ import createCategoryRouter from './routes/createCategory.js'
 import productRouter from "./routes/product.js"
 import createInvtRouter from "./routes/categoryInventory.js";
 import othersInvtRouter from './routes/othersInventory.js'
+import serviceInvtRouter from './routes/serviceInv.js'
 
 
 
@@ -50,6 +51,8 @@ mongoose
   app.use('/categoryInvt', createInvtRouter)
 
   app.use('/othersInvt', othersInvtRouter)
+
+  app.use('/serviceInvt', serviceInvtRouter)
 
 app.get("/", (req, res) => {
     console.log("hello cloud");

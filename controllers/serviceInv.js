@@ -5,7 +5,7 @@ export async function handleServicePost(req, res) {
       //  category, 
        serviceCode, 
        serviceDescription,
-      //  customField:[{serviceHsn}], 
+       customField:[{serviceHsn}], 
     // serviceDetails:[{unit}],
     // pricingDetails:[{salesPrice,sacCode,gst,}],
    } = req.body;
@@ -15,7 +15,7 @@ export async function handleServicePost(req, res) {
             // category:category,
             serviceCode:serviceCode,
             serviceDescription:serviceDescription,
-            // customField:[{serviceHsn:serviceHsn}],
+            customField:[{serviceHsn:serviceHsn}],
             // serviceDetails:[{unit:unit,
             //    }],
                 // pricingDetails:[{salesPrice:salesPrice,sacCode:sacCode,gst:gst,}] 

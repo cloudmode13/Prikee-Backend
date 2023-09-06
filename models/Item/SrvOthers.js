@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const srvOthersInvSchema = new mongoose.Schema(
   {
-    othersName: {
+    serviceOthersName: {
       type: String,
     },
   }

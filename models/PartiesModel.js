@@ -45,10 +45,12 @@ const partiesSchema = new mongoose.Schema(
       creditlimit:{
         type:String
       }
-
-     
   }
  
 );
 
-export default mongoose.model("Parties", partiesSchema);
+
+const Parties = mongoose.model("Parties", partiesSchema);
+
+export default Parties;
+

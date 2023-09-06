@@ -7,10 +7,13 @@ import dotenv from "dotenv";
 dotenv.config();
 import bcrypt from 'bcrypt'
 import _ from 'lodash'
-import otpGenerator from 'otp-generator'
-import Parties from './models/PartiesModel.js'
+import partiesRouter from './routes/partiesRoute.js'
+import createCategoryRouter from './routes/createCategory.js'
+import productRouter from "./routes/product.js"
+import createInvtRouter from "./routes/categoryInventory.js";
+import othersInvtRouter from './routes/othersInventory.js'
+import serviceInvtRouter from './routes/serviceInv.js'
 
-import CreateCategory from "./models/CreateCategory.js";
 
 
 
@@ -38,153 +41,18 @@ mongoose
 
   const db = mongoose.connection; 
 
+  app.use('/parties', partiesRouter)
 
-app.post('/signup', async (req, res) => {
-    const {number} = req.body
-
-    const data = {
-      number: number
-    }
-
-    try {
-        const user = await User.findOne(data)
-        console.log('try', data);
-        if(user) return res.status(400).send("user register already!")
-
-        const OTP = otpGenerator.generate(6, {
-            digits:true, alphabets:false, upperCase:false, specialChars:false
-        })
-        console.log('otp',OTP);
-
-        const otp = new Otp ({ number:number, otp: OTP});
-        const salt = await bcrypt.genSalt(10)
-        otp.otp = await bcrypt.hash(otp.otp, salt)
-        const result = await otp.save()
-        return res.status(200).send("otp send successfully")
-    } catch (error) {
-        console.log(error)
-    }
-})
-
-app.get('/sign', async (req, res) => {
-    
-    try {
-        const user = await User.find({})
-        console.log('try', user);
-        return res.send({status:"ok", data:user})
-      
-    } catch (error) {
-        console.log(error)
-    }
-})
-
-
-
-// app.use('/parties', partiesRoute)
-
-app.post("/parties",  async (req, res) => {
-  const { name,category, mobilenumber, party_type, balance,email,
-  gst, pannumber, billingaddress,shippingaddress,creditperiod,creditlimit } = req.body;
-
-  const data = {
-      name:name,
-      category:category,
-      mobilenumber:mobilenumber,
-      email:email,
-      party_type:party_type,
-      balance:balance,
-      gst:gst,
-      pannumber:pannumber,
-      billingaddress:billingaddress,
-      shippingaddress:shippingaddress,
-      creditperiod:creditperiod,
-      creditlimit:creditlimit
-      
-  };
-
-  try {
-    const parties = await Parties.create(data);
-    console.log(104, parties);
-    if (parties) {
-      res.status(201).send({ message: "Party created successfully", data: parties });
-    } else {
-      res.status(400).send({ message: "Party creation failed" });
-    }
-  } catch (e) {
-    console.log(e);
-
-  }
   
-});
+  app.use('/createCategory', createCategoryRouter)
 
-app.get("/partiesData", async (req, res) => {
-  try {
-    const parties = await Parties.find({});
-    res.send({ data: parties });
-    console.log(1, parties);
-  } catch (e) {
-    console.log(e);
-  }
-});
+  app.use('/product', productRouter)
 
+  app.use('/categoryInvt', createInvtRouter)
 
-app.delete("/partiesData/:id", async (req, res) => {
-  console.log(req.params.id);
+  app.use('/othersInvt', othersInvtRouter)
 
-  try {
-    const deletedParty = await Parties.findByIdAndDelete(req.params.id);
-
-    if (!deletedParty) {
-      return res.status(404).send({ message: "Party not found" });
-    }
-
-    return res.status(200).send({ message: "Successfully deleted" });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send({ message: "Server error" });
-  }
-});
-
-
-app.put("/partiesData/:id", async (req, res) => {
-  try {
-    const updatedParty = await Parties.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    console.log('hello'+ updatedParty);
-    if (!updatedParty) {
-      return res.status(404).send({ message: "Party not found" });
-    }
-
-    return res.status(200).send({ message: "Successfully updated", data: updatedParty });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send({ message: "Server error" });
-  }
-});
-
-
-app.post("/createCatogry",  async (req, res) => {
-  const { categoryName} = req.body;
-
-  const data = {
-    categoryName:categoryName,  
-  };
-
-  try {
-    const createCategory = await CreateCategory.create(data);
-    console.log(104, createCategory);
-    if (createCategory) {
-      res.status(201).send({ message: "Party created successfully", data: createCategory });
-    } else {
-      res.status(400).send({ message: "Party creation failed" });
-    }
-  } catch (e) {
-    console.log(e);
-
-  }
-});
-
-
-
+  app.use('/serviceInvt', serviceInvtRouter)
 
 app.get("/", (req, res) => {
     console.log("hello cloud");

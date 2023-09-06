@@ -1,5 +1,5 @@
 import express from 'express'
-import { handleCatagoryInvtPost, handleCatagoryInvtGet } from '../controllers/categoryInventory.js';
+import { handleCatagoryInvtPost, handleCatagoryInvtGet } from '../../controllers/Item/categoryInventory.js';
 const router = express.Router()
 
 

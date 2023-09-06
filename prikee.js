@@ -1,18 +1,17 @@
 import express from "express";
 import cors from "cors";
 import mongoose from 'mongoose';
-import User from './Users.js'
-import Otp from "./Otp.js";
 import dotenv from "dotenv";
 dotenv.config();
-import bcrypt from 'bcrypt'
 import _ from 'lodash'
-import partiesRouter from './routes/partiesRoute.js'
-import createCategoryRouter from './routes/createCategory.js'
-import productRouter from "./routes/product.js"
-import createInvtRouter from "./routes/categoryInventory.js";
-import othersInvtRouter from './routes/othersInventory.js'
-import serviceInvtRouter from './routes/serviceInv.js'
+import customerRouter from './routes/Customer/customerModal.js'
+import createCategoryRouter from './routes/Customer/createCategory.js'
+import productRouter from "./routes/Item/product.js"
+import createInvtRouter from "./routes/Item/categoryInventory.js";
+import othersInvtRouter from './routes/Item/othersInventory.js'
+import serviceInvtRouter from './routes/Item/serviceInv.js'
+import createSrvRouter from './routes/Item/SrvCategory.js'
+import othersSrvRouter from './routes/Item/SrvOthers.js'
 
 
 
@@ -41,8 +40,7 @@ mongoose
 
   const db = mongoose.connection;
 
-  app.use('/parties', partiesRouter)
-
+  app.use('/customer', customerRouter)
   
   app.use('/createCategory', createCategoryRouter)
 
@@ -53,6 +51,10 @@ mongoose
   app.use('/othersInvt', othersInvtRouter)
 
   app.use('/serviceInvt', serviceInvtRouter)
+
+  app.use('/categorySrv', createSrvRouter)
+
+  app.use('/othersSrv', othersSrvRouter)
 
 app.get("/", (req, res) => {
     console.log("hello cloud");

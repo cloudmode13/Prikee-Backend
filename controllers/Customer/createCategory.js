@@ -1,4 +1,4 @@
-import CreateCategory from "../models/CreateCategory.js";
+import CreateCategory from "../../models/Customer/CreateCategory.js";
 
 export async function handleCatagoryPost(req, res) {
   const { categoryName } = req.body;

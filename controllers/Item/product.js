@@ -1,4 +1,4 @@
-import Product from "../models/Product.js";
+import Product from "../../models/Item/Product.js";
 
 export async function handleProductPost(req, res) {
     const { itemName, category, itemCode, itemDescription, customField:[{hsn}], 

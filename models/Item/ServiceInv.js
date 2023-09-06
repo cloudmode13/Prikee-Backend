@@ -16,27 +16,17 @@ const serviceItemSchema = new mongoose.Schema(
       
       },
   
-      serviceDescription: {
+      service_Description: {
         type: String,
         
       },
-      // customField:[
-      //   {
-      //     serviceHsn: {
-      //           type:String
-      //       }
-      //   }
-      // ],
-      serviceDetails:[
-        {
+   
+    serviceHsn: {
+                type:String
+            },
             unit: {
                 type:String
             },
-           
-        }
-      ],
-      pricingDetails:[
-        {
             salesPrice: {
                 type:String
             },
@@ -47,9 +37,6 @@ const serviceItemSchema = new mongoose.Schema(
             gst:{
                 type:String
             },
-        }
-      ],
-
     }
  
 );

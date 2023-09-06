@@ -1,4 +1,4 @@
-import OthersInventory from "../models/OthersInventory.js";
+import OthersInventory from "../../models/Item/OthersInventory.js";
 
 export async function handleOthersInvtPost(req, res) {
   const { othersName } = req.body;

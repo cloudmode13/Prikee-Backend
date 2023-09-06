@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleServicePost, handleServiceGet, handleServiceUpdate, handleServiceDelete } from '../controllers/serviceInv.js';
+import { handleServicePost, handleServiceGet, handleServiceUpdate, handleServiceDelete } from '../../controllers/Item/serviceInv.js';
 
 const router = express.Router();
 

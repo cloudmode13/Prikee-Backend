@@ -1,5 +1,5 @@
 import express from 'express'
-import { handleCatagoryPost, handleCatagoryGet } from '../controllers/createCategory.js';
+import { handleCatagoryPost, handleCatagoryGet } from '../../controllers/Customer/createCategory.js';
 const router = express.Router()
 
 

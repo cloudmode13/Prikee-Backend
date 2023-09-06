@@ -1,6 +1,6 @@
-import CategoryInventory from "../models/CategoryInventory.js";
+import CategoryService from '../../models/Item/SrvCategory.js'
 
-export async function handleCatagoryInvtPost(req, res) {
+export async function handleCatagorySrvPost(req, res) {
   const { categoryNameInv } = req.body;
 
   const data = {
@@ -8,7 +8,7 @@ export async function handleCatagoryInvtPost(req, res) {
   };
 
   try {
-    const categoryInventory = await CategoryInventory.create(data);
+    const categoryInventory = await CategoryService.create(data);
     if (categoryInventory) {
       res.send({ data: categoryInventory });
       console.log('demo', categoryInventory);
@@ -22,9 +22,9 @@ export async function handleCatagoryInvtPost(req, res) {
 }
 
 
-export async function handleCatagoryInvtGet (req, res) {
+export async function handleCatagorySrvGet (req, res) {
   try {
-      const categoryInventory = await CategoryInventory.find({});
+      const categoryInventory = await CategoryService.find({});
       res.send({ data: categoryInventory });
       console.log(1, categoryInventory);
     } catch (e) {

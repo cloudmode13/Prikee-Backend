@@ -1,24 +1,24 @@
-import Service from "../models/ServiceInv.js";
+import Service from "../../models/Item/ServiceInv.js";
 
 export async function handleServicePost(req, res) {
     const { serviceName,
-      //  category, 
+       category, 
        serviceCode, 
-       serviceDescription,
-       customField:[{serviceHsn}], 
-    // serviceDetails:[{unit}],
-    // pricingDetails:[{salesPrice,sacCode,gst,}],
+       service_Description,
+      serviceHsn, 
+unit,salesPrice,sacCode,gst,
    } = req.body;
       
         const data = {
             serviceName:serviceName,
-            // category:category,
+            category:category,
             serviceCode:serviceCode,
-            serviceDescription:serviceDescription,
-            customField:[{serviceHsn:serviceHsn}],
-            // serviceDetails:[{unit:unit,
-            //    }],
-                // pricingDetails:[{salesPrice:salesPrice,sacCode:sacCode,gst:gst,}] 
+            service_Description:service_Description,
+          serviceHsn:serviceHsn,
+            unit:unit,               
+            salesPrice:salesPrice,
+            sacCode:sacCode,
+            gst:gst 
         };
         
         try {

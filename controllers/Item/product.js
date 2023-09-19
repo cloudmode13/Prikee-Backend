@@ -12,8 +12,8 @@ export async function handleProductPost(req, res) {
     itemCode,
     itemDescription,
     customField,
-    // stockDetails: [{ unit, openingStock, date }],
-    // pricingDetails: [{ salesPrice, purchasePrice, gst, hsnCode }],
+    stockDetails,
+    pricingDetails,
   } = req.body;
   console.log(req.body);
 
@@ -23,15 +23,8 @@ export async function handleProductPost(req, res) {
     itemCode,
     itemDescription,
     customField,
-    // stockDetails: [{ unit: unit, openingStock: openingStock, date: date }],
-    // pricingDetails: [
-    //   {
-    //     salesPrice: salesPrice,
-    //     purchasePrice: purchasePrice,
-    //     hsnCode: hsnCode,
-    //     gst: gst,
-    //   },
-    // ],
+    stockDetails,
+    pricingDetails,
   };
 
   try {

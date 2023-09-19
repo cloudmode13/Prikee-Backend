@@ -1,48 +1,39 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const serviceItemSchema = new mongoose.Schema(
-  {
-    serviceName: {
-      type: String,
- 
-    },
+const serviceItemSchema = new mongoose.Schema({
+  serviceName: {
+    type: String,
+  },
 
-    category: {
-      type: String,
-     
-    },
-   serviceCode: {
-        type: String,
-      
-      },
-  
-      service_Description: {
-        type: String,
-        
-      },
-   
-    serviceHsn: {
-                type:String
-            },
-            unit: {
-                type:String
-            },
-            salesPrice: {
-                type:String
-            },
-           
-            sacCode:{
-                type:String
-            },
-            gst:{
-                type:String
-            },
-    }
- 
-);
+  category: {
+    type: String,
+  },
+  serviceCode: {
+    type: String,
+  },
 
+  service_Description: {
+    type: String,
+  },
 
-const Service = mongoose.model("serviceItemSchema", serviceItemSchema);
+  serviceHsn: {
+    type: String,
+  },
+  unit: {
+    type: String,
+  },
+  serviceSalesPrice: {
+    type: String,
+  },
+
+  sacCode: {
+    type: String,
+  },
+  srvGst: {
+    type: String,
+  },
+});
+
+const Service = mongoose.model('serviceItemSchema', serviceItemSchema);
 
 export default Service;
-

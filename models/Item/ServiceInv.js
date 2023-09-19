@@ -12,7 +12,7 @@ const serviceItemSchema = new mongoose.Schema({
     type: String,
   },
 
-  service_Description: {
+  serviceDescription: {
     type: String,
   },
 

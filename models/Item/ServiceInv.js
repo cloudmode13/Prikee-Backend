@@ -25,7 +25,9 @@ const serviceItemSchema = new mongoose.Schema({
   serviceSalesPrice: {
     type: String,
   },
-
+  salesSrvTax: {
+    type: String,
+  },
   sacCode: {
     type: String,
   },

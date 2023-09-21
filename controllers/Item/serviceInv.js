@@ -9,6 +9,7 @@ export async function handleServicePost(req, res) {
     serviceHsn,
     unit,
     serviceSalesPrice,
+    salesSrvTax,
     sacCode,
     srvGst,
   } = req.body;
@@ -21,6 +22,7 @@ export async function handleServicePost(req, res) {
     serviceHsn: serviceHsn,
     unit: unit,
     serviceSalesPrice: serviceSalesPrice,
+    salesSrvTax: salesSrvTax,
     sacCode: sacCode,
     srvGst: srvGst,
   };

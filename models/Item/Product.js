@@ -44,6 +44,12 @@ const productItemSchema = new mongoose.Schema({
       hsnCode: {
         type: String,
       },
+      salesTax: {
+        type: String,
+      },
+      purchaseTax: {
+        type: String,
+      },
       gst: {
         type: String,
       },

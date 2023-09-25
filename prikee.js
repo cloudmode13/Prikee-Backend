@@ -4,8 +4,9 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 import _ from 'lodash';
-import customerRouter from './routes/Customer/customerModal.js';
-import createCategoryRouter from './routes/Customer/createCategory.js';
+// import customerRouter from './routes/Customer/customerModal.js';
+import clientRouter from './routes/Client/clientModal.js';
+import createCategoryRouter from './routes/Client/createCategory.js';
 import productRouter from './routes/Item/product.js';
 import createInvtRouter from './routes/Item/categoryInventory.js';
 import othersInvtRouter from './routes/Item/othersInventory.js';
@@ -34,7 +35,7 @@ mongoose
 
 const db = mongoose.connection;
 
-app.use('/customer', customerRouter);
+app.use('/client', clientRouter);
 
 app.use('/createCategory', createCategoryRouter);
 

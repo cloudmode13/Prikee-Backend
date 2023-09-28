@@ -9,9 +9,9 @@ export async function handleServicePost(req, res) {
     serviceHsn,
     unit,
     serviceSalesPrice,
-    salesSrvTax,
+    srvSalesTax,
     sacCode,
-    srvGst,
+    serviceGst,
   } = req.body;
 
   const data = {
@@ -22,9 +22,9 @@ export async function handleServicePost(req, res) {
     serviceHsn: serviceHsn,
     unit: unit,
     serviceSalesPrice: serviceSalesPrice,
-    salesSrvTax: salesSrvTax,
+    srvSalesTax: srvSalesTax,
     sacCode: sacCode,
-    srvGst: srvGst,
+    serviceGst: serviceGst,
   };
 
   try {

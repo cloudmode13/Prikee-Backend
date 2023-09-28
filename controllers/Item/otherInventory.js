@@ -1,4 +1,4 @@
-import OthersInventory from "../../models/Item/OthersInventory.js";
+import OthersInventory from '../../models/Item/OthersInventory.js';
 
 export async function handleOthersInvtPost(req, res) {
   const { othersName } = req.body;
@@ -13,21 +13,36 @@ export async function handleOthersInvtPost(req, res) {
       res.send({ data: othersInventory });
       console.log('demo', othersInventory);
     } else {
-      res.send({ message: "not ok" });
+      res.send({ message: 'not ok' });
     }
   } catch (err) {
     console.log(err);
   }
- 
 }
 
-
-export async function handleOthersInvtGet (req, res) {
+export async function handleOthersInvtGet(req, res) {
   try {
-      const othersInventory = await OthersInventory.find({});
-      res.send({ data: othersInventory });
-      console.log(1, othersInventory);
-    } catch (e) {
-      console.log(e);
+    const othersInventory = await OthersInventory.find({});
+    res.send({ data: othersInventory });
+    console.log(1, othersInventory);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function handleOthersInvtDelete(req, res) {
+  try {
+    const deletedOthersInvt = await OthersInventory.findByIdAndDelete(
+      req.params.id,
+    );
+
+    if (!deletedOthersInvt) {
+      return res.status(404).send({ message: 'Category not found' });
     }
+
+    return res.status(200).send({ message: 'Successfully deleted' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ message: 'Server error' });
+  }
 }

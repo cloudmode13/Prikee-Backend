@@ -11,9 +11,17 @@ export async function handleProductPost(req, res) {
     category,
     itemCode,
     itemDescription,
-    customField,
-    stockDetails,
-    pricingDetails,
+    hsn,
+    unit,
+    openingStock,
+    date,
+    salesPrice,
+    purchasePrice,
+    hsnCode,
+    salesTax,
+    purchaseTax,
+    salesGst,
+    purchaseGst,
   } = req.body;
   console.log(req.body);
 
@@ -22,9 +30,17 @@ export async function handleProductPost(req, res) {
     category,
     itemCode,
     itemDescription,
-    customField,
-    stockDetails,
-    pricingDetails,
+    hsn,
+    unit,
+    openingStock,
+    date,
+    salesPrice,
+    purchasePrice,
+    hsnCode,
+    salesTax,
+    purchaseTax,
+    salesGst,
+    purchaseGst,
   };
 
   try {

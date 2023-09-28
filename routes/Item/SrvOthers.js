@@ -1,10 +1,15 @@
-import express from 'express'
-import { handleSrvOthersPost, handleSrvOthersGet } from '../../controllers/Item/srvOthers.js';
-const router = express.Router()
+import express from 'express';
+import {
+  handleSrvOthersPost,
+  handleSrvOthersGet,
+  handleSrvOthersDelete,
+} from '../../controllers/Item/srvOthers.js';
+const router = express.Router();
 
+router.post('/', handleSrvOthersPost);
 
-router.post("/",handleSrvOthersPost);
-  
-router.get("/", handleSrvOthersGet)
+router.get('/', handleSrvOthersGet);
 
- export default router;
+router.delete('/:id', handleSrvOthersDelete);
+
+export default router;

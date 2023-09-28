@@ -45,7 +45,7 @@ app.use('/categoryInvt', createInvtRouter);
 
 app.use('/othersInvt', othersInvtRouter);
 
-app.use('/serviceInvt', serviceInvtRouter);
+app.use('/service', serviceInvtRouter);
 
 app.use('/categorySrv', createSrvRouter);
 

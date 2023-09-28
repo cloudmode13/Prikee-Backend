@@ -13,48 +13,39 @@ const productItemSchema = new mongoose.Schema({
   itemDescription: {
     type: String,
   },
-  customField: [
-    {
-      hsn: {
-        type: String,
-      },
-    },
-  ],
-  stockDetails: [
-    {
-      unit: {
-        type: String,
-      },
-      openingStock: {
-        type: String,
-      },
-      date: {
-        type: String,
-      },
-    },
-  ],
-  pricingDetails: [
-    {
-      salesPrice: {
-        type: String,
-      },
-      purchasePrice: {
-        type: String,
-      },
-      hsnCode: {
-        type: String,
-      },
-      salesTax: {
-        type: String,
-      },
-      purchaseTax: {
-        type: String,
-      },
-      gst: {
-        type: String,
-      },
-    },
-  ],
+  hsn: {
+    type: String,
+  },
+  unit: {
+    type: String,
+  },
+  openingStock: {
+    type: String,
+  },
+  date: {
+    type: String,
+  },
+  salesPrice: {
+    type: String,
+  },
+  purchasePrice: {
+    type: String,
+  },
+  hsnCode: {
+    type: String,
+  },
+  salesTax: {
+    type: String,
+  },
+  purchaseTax: {
+    type: String,
+  },
+  salesGst: {
+    type: String,
+  },
+  purchaseGst: {
+    type: String,
+  },
 });
 
 const Product = mongoose.model('productItemSchema', productItemSchema);

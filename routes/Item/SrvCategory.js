@@ -1,10 +1,15 @@
-import express from 'express'
-import { handleCatagorySrvPost, handleCatagorySrvGet } from '../../controllers/Item/srvCategory.js';
-const router = express.Router()
+import express from 'express';
+import {
+  handleCatagorySrvPost,
+  handleCatagorySrvGet,
+  handleCategorySrvDelete,
+} from '../../controllers/Item/srvCategory.js';
+const router = express.Router();
 
+router.post('/', handleCatagorySrvPost);
 
-router.post("/",handleCatagorySrvPost);
-  
-router.get("/", handleCatagorySrvGet)
+router.get('/', handleCatagorySrvGet);
 
- export default router;
+router.delete('/:id', handleCategorySrvDelete);
+
+export default router;

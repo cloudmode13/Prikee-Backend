@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 import _ from 'lodash';
-// import customerRouter from './routes/Customer/customerModal.js';
 import clientRouter from './routes/Client/clientModal.js';
 import createCategoryRouter from './routes/Client/createCategory.js';
 import productRouter from './routes/Item/product.js';
@@ -13,6 +12,8 @@ import othersInvtRouter from './routes/Item/othersInventory.js';
 import serviceInvtRouter from './routes/Item/serviceInv.js';
 import createSrvRouter from './routes/Item/SrvCategory.js';
 import othersSrvRouter from './routes/Item/SrvOthers.js';
+import CustomerNameRouter from './routes/SalesInvoice/Create_CustomerName.js';
+import SalesPersonRouter from './routes/Setting/SalesPerson.js';
 
 const app = express();
 app.use(cors());
@@ -50,6 +51,10 @@ app.use('/service', serviceInvtRouter);
 app.use('/categorySrv', createSrvRouter);
 
 app.use('/othersSrv', othersSrvRouter);
+
+app.use('/customerName', CustomerNameRouter);
+
+app.use('/salesPerson', SalesPersonRouter);
 
 app.get('/', (req, res) => {
   console.log('hello cloud');

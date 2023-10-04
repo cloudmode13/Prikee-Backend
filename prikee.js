@@ -14,6 +14,7 @@ import createSrvRouter from './routes/Item/SrvCategory.js';
 import othersSrvRouter from './routes/Item/SrvOthers.js';
 import CustomerNameRouter from './routes/SalesInvoice/Create_CustomerName.js';
 import SalesPersonRouter from './routes/Setting/SalesPerson.js';
+import salesInvoiceRouter from './routes/SalesInvoice/SalesInvoice.js';
 
 const app = express();
 app.use(cors());
@@ -55,6 +56,8 @@ app.use('/othersSrv', othersSrvRouter);
 app.use('/customerName', CustomerNameRouter);
 
 app.use('/salesPerson', SalesPersonRouter);
+
+app.use('/salesInvoice', salesInvoiceRouter);
 
 app.get('/', (req, res) => {
   console.log('hello cloud');

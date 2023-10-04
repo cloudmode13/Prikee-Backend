@@ -32,14 +32,10 @@ export async function handleSalesPersonGet(req, res) {
 export async function handleSalesPersonEdit(req, res) {
   try {
     const updatedSalesPerson = await SalesPerson.findByIdAndUpdate(
-      req.param.id,
+      req.params.id,
       req.body,
       { new: true },
     );
-    if (!updatedSalesPerson) {
-      return res.status(404).send({ message: 'Party not found' });
-    }
-
     return res
       .status(200)
       .send({ message: 'Successfully updated', data: updatedSalesPerson });

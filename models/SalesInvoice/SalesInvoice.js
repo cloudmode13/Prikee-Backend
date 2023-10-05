@@ -19,6 +19,9 @@ const salesInvoiceSchema = new mongoose.Schema({
   salesRep: {
     type: String,
   },
+  subject: {
+    type: String,
+  },
 });
 
 export default mongoose.model('SalesInvoice', salesInvoiceSchema);

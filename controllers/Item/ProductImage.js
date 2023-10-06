@@ -41,7 +41,6 @@ export async function handleProductImageGet(req, res) {
 
 export async function handleProductImageUpdate(req, res) {
   const { id } = req.params;
-  //   const { imagePath } = req.body;
   console.log(45, req.body);
   try {
     console.log(47, req.file.path);

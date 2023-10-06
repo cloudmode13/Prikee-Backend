@@ -5,19 +5,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 import _ from 'lodash';
 import productImageRouter from './routes/Item/productImage.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-const productPath = path.join(__dirname, 'product');
 
-app.use('/Images', express.static(path.join(productPath, 'Images')));
+app.use(express.static('product'));
+
 const port = process.env.PORT || 8000;
 
 const mongourl =

@@ -4,9 +4,6 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 import _ from 'lodash';
-// import multer from 'multer';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import clientRouter from './routes/Client/clientModal.js';
 import createCategoryRouter from './routes/Client/createCategory.js';
 import productRouter from './routes/Item/product.js';
@@ -19,14 +16,13 @@ import CustomerNameRouter from './routes/SalesInvoice/Create_CustomerName.js';
 import SalesPersonRouter from './routes/Setting/SalesPerson.js';
 import salesInvoiceRouter from './routes/SalesInvoice/SalesInvoice.js';
 import productImageRouter from './routes/Item/productImage.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import serviceImageRouter from './routes/Item/serviceImage.js';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/productImage', express.static(`${__dirname}/product/Images`));
+app.use(express.static('product'));
+app.use(express.static('service'));
 
 const port = process.env.PORT || 8000;
 
@@ -69,6 +65,7 @@ app.use('/salesInvoice', salesInvoiceRouter);
 
 app.use('/productImage', productImageRouter);
 
+app.use('/serviceImage', serviceImageRouter);
 app.get('/', (req, res) => {
   console.log('hello cloud');
 });

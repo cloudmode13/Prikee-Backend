@@ -2,11 +2,11 @@
   "name": "prikee_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "demo.js",
+  "main": "prikee.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node demo.js",
-    "dev": "nodemon demo.js"
+    "start": "node prikee.js",
+    "dev": "nodemon prikee.js"
   },
   "author": "",
   "license": "ISC",

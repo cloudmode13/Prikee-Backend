@@ -3,11 +3,11 @@ import multer from 'multer';
 import path from 'path';
 
 import {
-  handleProductImagePost,
-  handleProductImageGet,
-  handleProductImageUpdate,
-  handleProductImageDelete,
-} from '../../controllers/Item/ProductImage.js';
+  handleServiceImagePost,
+  handleServiceImageGet,
+  handleServiceImageUpdate,
+  handleServiceImageDelete,
+} from '../../controllers/Item/serviceImage.js';
 
 const app = express();
 
@@ -17,7 +17,7 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'product/Images');
+    cb(null, 'service/ServiceImages');
   },
   filename: function (req, file, cb) {
     cb(
@@ -28,12 +28,12 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-router.post('/', upload.single('productImage'), handleProductImagePost);
+router.post('/', upload.single('serviceImage'), handleServiceImagePost);
 
-router.get('/', handleProductImageGet);
+router.get('/', handleServiceImageGet);
 
-router.put('/:id', upload.single('productImage'), handleProductImageUpdate);
+router.put('/:id', upload.single('serviceImage'), handleServiceImageUpdate);
 
-router.delete('/:id', handleProductImageDelete);
+router.delete('/:id', handleServiceImageDelete);
 
 export default router;

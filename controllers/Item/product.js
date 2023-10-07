@@ -22,6 +22,7 @@ export async function handleProductPost(req, res) {
     purchaseTax,
     salesGst,
     purchaseGst,
+    imageData,
   } = req.body;
   console.log(req.body);
 
@@ -41,6 +42,7 @@ export async function handleProductPost(req, res) {
     purchaseTax,
     salesGst,
     purchaseGst,
+    imageData,
   };
 
   try {

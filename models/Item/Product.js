@@ -46,6 +46,9 @@ const productItemSchema = new mongoose.Schema({
   purchaseGst: {
     type: String,
   },
+  imageData: {
+    type: String,
+  },
 });
 
 const Product = mongoose.model('productItemSchema', productItemSchema);

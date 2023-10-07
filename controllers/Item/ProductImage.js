@@ -2,8 +2,6 @@ import ProductImage from '../../models/Item/ProductImage.js';
 import fs from 'fs';
 
 export async function handleProductImagePost(req, res) {
-  // console.log(4, req.file.filename);
-
   if (!req.body || !req.file) {
     res.status(400).send({ message: 'Invalid request body' });
     return;
@@ -17,7 +15,7 @@ export async function handleProductImagePost(req, res) {
 
   try {
     const productImage = await ProductImage.create(data);
-    // console.log(104, productImage);
+    console.log(104, productImage);
     if (productImage) {
       res
         .status(201)
@@ -34,7 +32,7 @@ export async function handleProductImageGet(req, res) {
   try {
     const productImage = await ProductImage.find({});
     res.send({ data: productImage });
-    // console.log(1, productImage);
+    console.log(1, productImage);
   } catch (e) {
     console.log(e);
   }
@@ -45,23 +43,37 @@ export async function handleProductImageUpdate(req, res) {
   console.log(45, req.body);
   try {
     console.log(47, req.file.path);
+
+    // Find the existing product image
+    const existingProductImage = await ProductImage.findById(id);
+
+    if (!existingProductImage) {
+      return res.status(404).send({ message: 'Product image not found' });
+    }
+
+    // Delete the existing image if it exists
+    if (existingProductImage.imagePath) {
+      const imagePath = `product/Images/${existingProductImage.imagePath}`;
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+      }
+    }
+
+    // Update the product image in the database
     const updatedProductImage = await ProductImage.findByIdAndUpdate(
       id,
       { imagePath: req.file ? req.file.filename : null },
       { new: true },
     );
+
     console.log(53, updatedProductImage, req.file.path);
+
     if (!updatedProductImage) {
       return res.status(404).send({ message: 'Party not found' });
     }
+
     console.log(57, updatedProductImage.imagePath);
 
-    const imagePath = `product/Images/${updatedProductImage?.imagePath}`;
-
-    if (fs.existsSync(imagePath)) {
-      console.log(62, imagePath);
-      fs.unlinkSync(imagePath);
-    }
     return res
       .status(200)
       .send({ message: 'Successfully updated', data: updatedProductImage });

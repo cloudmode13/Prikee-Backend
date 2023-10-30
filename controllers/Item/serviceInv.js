@@ -15,16 +15,16 @@ export async function handleServicePost(req, res) {
   } = req.body;
 
   const data = {
-    serviceName: serviceName,
-    category: category,
-    serviceCode: serviceCode,
-    serviceDescription: serviceDescription,
-    serviceHsn: serviceHsn,
-    unit: unit,
-    serviceSalesPrice: serviceSalesPrice,
-    srvSalesTax: srvSalesTax,
-    sacCode: sacCode,
-    serviceGst: serviceGst,
+    serviceName,
+    category,
+    serviceCode,
+    serviceDescription,
+    serviceHsn,
+    unit,
+    serviceSalesPrice,
+    srvSalesTax,
+    sacCode,
+    serviceGst,
   };
 
   try {

@@ -17,6 +17,7 @@ import SalesPersonRouter from './routes/Setting/SalesPerson.js';
 import salesInvoiceRouter from './routes/SalesInvoice/SalesInvoice.js';
 import productImageRouter from './routes/Item/productImage.js';
 import serviceImageRouter from './routes/Item/serviceImage.js';
+import inventoryItemRouter from './routes/SalesInvoice/InventoryItem.js';
 
 const app = express();
 app.use(cors());
@@ -66,6 +67,9 @@ app.use('/salesInvoice', salesInvoiceRouter);
 app.use('/productImage', productImageRouter);
 
 app.use('/serviceImage', serviceImageRouter);
+
+app.use('/inventoryItem', inventoryItemRouter);
+
 app.get('/', (req, res) => {
   console.log('hello cloud');
 });

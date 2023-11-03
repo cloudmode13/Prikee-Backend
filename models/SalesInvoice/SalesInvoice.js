@@ -22,6 +22,11 @@ const salesInvoiceSchema = new mongoose.Schema({
   subject: {
     type: String,
   },
+  inventoryItem: [
+    {
+      itemName: String,
+    },
+  ],
 });
 
 export default mongoose.model('SalesInvoice', salesInvoiceSchema);

@@ -14,6 +14,7 @@ export async function handleSalesInvoicePost(req, res) {
     dueDate,
     salesRep,
     subject,
+    inventoryItem: [{ itemName }],
   } = req.body;
   console.log(req.body);
 
@@ -25,6 +26,7 @@ export async function handleSalesInvoicePost(req, res) {
     dueDate,
     salesRep,
     subject,
+    inventoryItem: [{ itemName }],
   };
 
   try {

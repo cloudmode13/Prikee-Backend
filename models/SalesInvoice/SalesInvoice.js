@@ -25,8 +25,16 @@ const salesInvoiceSchema = new mongoose.Schema({
   inventoryItem: [
     {
       itemName: String,
+      salesPrice: String,
+      salesGst: String,
+      quantity: String,
+      totalPrices: String,
+      discount: String,
+      finalAmount: String,
     },
   ],
+  subTotal: { type: String },
+  paidMode: String,
 });
 
 export default mongoose.model('SalesInvoice', salesInvoiceSchema);

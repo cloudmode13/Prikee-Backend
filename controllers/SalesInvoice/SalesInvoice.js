@@ -1,7 +1,6 @@
 import SalesInvoice from '../../models/SalesInvoice/SalesInvoice.js';
 
 export async function handleSalesInvoicePost(req, res) {
-  console.log(req.body);
   if (!req.body) {
     res.status(400).send({ message: 'Invalid request body' });
     return;
@@ -14,9 +13,11 @@ export async function handleSalesInvoicePost(req, res) {
     dueDate,
     salesRep,
     subject,
-    inventoryItem: [{ itemName }],
+    inventoryItem,
+    subTotal,
+    paidMode,
   } = req.body;
-  console.log(req.body);
+  console.log(19, req.body);
 
   const data = {
     clientName,
@@ -26,8 +27,12 @@ export async function handleSalesInvoicePost(req, res) {
     dueDate,
     salesRep,
     subject,
-    inventoryItem: [{ itemName }],
+    inventoryItem,
+    subTotal,
+    paidMode,
   };
+
+  console.log(32, data);
 
   try {
     const salesInvoice = await SalesInvoice.create(data);

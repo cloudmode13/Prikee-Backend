@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const demoSchema = new mongoose.Schema({
   categoryName: {
-    type: String,
+    type: Number,
   },
 });
 

@@ -4,25 +4,34 @@ const organisationSchema = new mongoose.Schema({
   organisationName: {
     type: String,
   },
-  organisationAddress: {
+  address: {
     type: String,
   },
-  organisationPhoneNmuber: {
+  phoneNmuber: {
     type: String,
   },
-  organisationMobileNUmber: {
+  mobileNUmber: {
     type: String,
   },
-  organisationGSTIN: {
+  GSTIN: {
     type: String,
   },
-  organisationState: {
+  email: {
     type: String,
   },
-  organisationCode: {
+  bankName: {
     type: String,
   },
-  organisationEmail: {
+  accountNo: {
+    type: String,
+  },
+  branch: {
+    type: String,
+  },
+  ifscCode: {
+    type: String,
+  },
+  panNumber: {
     type: String,
   },
 });

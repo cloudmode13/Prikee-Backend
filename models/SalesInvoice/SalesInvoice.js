@@ -19,6 +19,15 @@ const salesInvoiceSchema = new mongoose.Schema({
   salesRep: {
     type: String,
   },
+  PONumber: {
+    type: String,
+  },
+  PODate: {
+    type: String,
+  },
+  remarks: {
+    type: String,
+  },
   subject: {
     type: String,
   },

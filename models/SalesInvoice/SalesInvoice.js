@@ -42,6 +42,7 @@ const salesInvoiceSchema = new mongoose.Schema({
       finalAmount: String,
     },
   ],
+  total: { type: String },
   subTotal: { type: String },
   paidMode: String,
 });

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const organisationSchema = new mongoose.Schema({
   organisationName: {
@@ -7,10 +7,10 @@ const organisationSchema = new mongoose.Schema({
   address: {
     type: String,
   },
-  phoneNmuber: {
+  phoneNumber: {
     type: String,
   },
-  mobileNUmber: {
+  mobileNumber: {
     type: String,
   },
   GSTIN: {
@@ -36,4 +36,4 @@ const organisationSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Organisation", organisationSchema);
+export default mongoose.model('Organisation', organisationSchema);

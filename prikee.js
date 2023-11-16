@@ -71,7 +71,7 @@ app.use('/serviceImage', serviceImageRouter);
 
 app.use('/inventoryItem', inventoryItemRouter);
 
-app.use('/quoinvItem', inventoryItemRouter);
+app.use('/quoInvItem', inventoryItemRouter);
 
 app.use('/organisation', organisation);
 

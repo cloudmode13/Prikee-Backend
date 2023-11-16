@@ -19,6 +19,7 @@ import productImageRouter from './routes/Item/productImage.js';
 import serviceImageRouter from './routes/Item/serviceImage.js';
 import inventoryItemRouter from './routes/SalesInvoice/InventoryItem.js';
 import organisation from './routes/Setting/Organisation.js';
+import quotationRouter from './routes/SalesInvoice/Quotation.js';
 
 const app = express();
 app.use(cors());
@@ -74,6 +75,8 @@ app.use('/inventoryItem', inventoryItemRouter);
 app.use('/quoInvItem', inventoryItemRouter);
 
 app.use('/organisation', organisation);
+
+app.use('/quotation', quotationRouter);
 
 app.get('/', (req, res) => {
   console.log('hello cloud');

@@ -12,7 +12,7 @@ export async function handleInventoryItemPost(req, res) {
 
   try {
     const inventoryItem = await InventoryItem.create(data);
-
+    console.log(15, inventoryItem);
     if (inventoryItem) {
       res
         .status(201)

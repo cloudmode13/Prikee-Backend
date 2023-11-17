@@ -20,6 +20,7 @@ import serviceImageRouter from './routes/Item/serviceImage.js';
 import inventoryItemRouter from './routes/SalesInvoice/InventoryItem.js';
 import organisation from './routes/Setting/Organisation.js';
 import quotationRouter from './routes/SalesInvoice/Quotation.js';
+import quoInvItemRouter from './routes/SalesInvoice/QuoInvItem.js';
 
 const app = express();
 app.use(cors());
@@ -72,7 +73,7 @@ app.use('/serviceImage', serviceImageRouter);
 
 app.use('/inventoryItem', inventoryItemRouter);
 
-app.use('/quoInvItem', inventoryItemRouter);
+app.use('/quoInvItem', quoInvItemRouter);
 
 app.use('/organisation', organisation);
 

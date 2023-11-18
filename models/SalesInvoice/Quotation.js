@@ -39,6 +39,7 @@ const quotationSchema = new mongoose.Schema({
   ],
   total: { type: String },
   subTotal: { type: String },
+  gst: { type: String },
 });
 
 export default mongoose.model('Quotation', quotationSchema);

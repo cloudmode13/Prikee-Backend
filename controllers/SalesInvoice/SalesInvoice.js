@@ -19,6 +19,7 @@ export async function handleSalesInvoicePost(req, res) {
     inventoryItem,
     subTotal,
     total,
+    gst,
     paidMode,
   } = req.body;
   console.log(19, req.body);
@@ -36,6 +37,7 @@ export async function handleSalesInvoicePost(req, res) {
     subject,
     inventoryItem,
     total,
+    gst,
     subTotal,
     paidMode,
   };

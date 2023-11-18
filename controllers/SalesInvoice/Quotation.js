@@ -13,6 +13,7 @@ export async function handleQuotationPost(req, res) {
     inventoryItem,
     subTotal,
     total,
+    gst,
   } = req.body;
   console.log(19, req.body);
 
@@ -28,6 +29,7 @@ export async function handleQuotationPost(req, res) {
     inventoryItem,
     subTotal,
     total,
+    gst,
   };
 
   console.log(32, data);

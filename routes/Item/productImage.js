@@ -13,8 +13,6 @@ const app = express();
 
 const router = express.Router();
 
-// app.use(express.static('product'));
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'product/Images');

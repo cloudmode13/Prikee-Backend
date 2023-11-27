@@ -1,9 +1,12 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const productItemSchema = new mongoose.Schema({
   itemName: {
     type: String,
   },
+  // productImage: {
+  //   type: String,
+  // },
   quantity: {
     type: Number,
   },
@@ -49,11 +52,13 @@ const productItemSchema = new mongoose.Schema({
   purchaseGst: {
     type: String,
   },
-  imageData: {
-    type: String,
-  },
+  imageData: [
+    {
+      imagePath: String,
+    },
+  ],
 });
 
-const Product = mongoose.model("productItemSchema", productItemSchema);
+const Product = mongoose.model('productItemSchema', productItemSchema);
 
 export default Product;

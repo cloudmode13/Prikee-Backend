@@ -2,15 +2,10 @@ import ProductImage from '../../models/Item/ProductImage.js';
 import fs from 'fs';
 
 export async function handleProductImagePost(req, res) {
-  if (!req.body || !req.file) {
-    res.status(400).send({ message: 'Invalid request body' });
-    return;
-  }
-
   const imagePath = req.file ? req.file.filename : null;
 
   const data = {
-    imagePath: imagePath,
+    imagePath,
   };
 
   try {
@@ -18,7 +13,7 @@ export async function handleProductImagePost(req, res) {
     console.log(104, productImage);
     if (productImage) {
       res
-        .status(201)
+        .status(200)
         .send({ message: 'Party created successfully', data: productImage });
     } else {
       res.status(400).send({ message: 'Party creation failed' });

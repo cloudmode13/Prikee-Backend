@@ -23,6 +23,7 @@ import organisation from './routes/Setting/Organisation.js';
 import quotationRouter from './routes/SalesInvoice/Quotation.js';
 import quoInvItemRouter from './routes/SalesInvoice/QuoInvItem.js';
 import dcRouter from './routes/SalesInvoice/DeliveryChallan.js';
+import paidStatusRouter from './routes/SalesInvoice/PaidStatus.js';
 
 const app = express();
 app.use(cors());
@@ -84,6 +85,8 @@ app.use('/organisation', organisation);
 app.use('/quotation', quotationRouter);
 
 app.use('/deliveryChallan', dcRouter);
+
+app.use('/paidStatus', paidStatusRouter);
 
 app.get('/', (req, res) => {
   console.log('hello cloud');

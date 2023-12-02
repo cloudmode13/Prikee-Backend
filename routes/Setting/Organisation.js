@@ -1,18 +1,35 @@
-import express from "express";
+import express from 'express';
+import multer from 'multer';
+import path from 'path';
 import {
   handleOrganisationPost,
   handleOrganisationGet,
   handleOrganisationEdit,
   handleOrganisationDelete,
-} from "../../controllers/Setting/Organisation.js";
+} from '../../controllers/Setting/Organisation.js';
+
 const router = express.Router();
 
-router.post("/", handleOrganisationPost);
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'organisation/Logo');
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + '-' + Date.now() + path.extname(file.originalname),
+    );
+  },
+});
 
-router.get("/", handleOrganisationGet);
+const upload = multer({ storage: storage });
 
-router.put("/:id", handleOrganisationEdit);
+router.post('/', upload.single('orgLogo'), handleOrganisationPost);
 
-router.delete("/:id", handleOrganisationDelete);
+router.get('/', handleOrganisationGet);
+
+router.put('/:id', upload.single('orgLogo'), handleOrganisationEdit);
+
+router.delete('/:id', handleOrganisationDelete);
 
 export default router;

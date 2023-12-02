@@ -8,7 +8,7 @@ export async function handleProductPost(req, res) {
     category,
     itemCode,
     itemDescription,
-    hsn,
+    // hsn,
     unit,
     openingStock,
     date,
@@ -19,24 +19,18 @@ export async function handleProductPost(req, res) {
     purchaseTax,
     salesGst,
     purchaseGst,
-    imageData,
   } = req.body;
 
+  const imagePath = req.file ? req.file.filename : null;
+
   try {
-    // Find the product image using the ID
-    // const productImage = await ProductImage.findById([]);
-
-    // if (!productImage) {
-    //   return res.status(404).send({ message: 'Product image not found' });
-    // }
-
     const data = {
       itemName,
       quantity,
       category,
       itemCode,
       itemDescription,
-      hsn,
+      // hsn,
       unit,
       openingStock,
       date,
@@ -47,7 +41,7 @@ export async function handleProductPost(req, res) {
       purchaseTax,
       salesGst,
       purchaseGst,
-      imageData,
+      imagePath,
     };
 
     const productItem = await Product.create(data);
@@ -75,10 +69,13 @@ export async function handleProductGet(req, res) {
 }
 
 export async function handleProductUpdate(req, res) {
+  const imagePath = req.file ? req.file.filename : null;
+  console.log('upd', imagePath, req.body);
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      req.body,
+
+      { ...req.body, imagePath },
       { new: true },
     );
     console.log('hello' + updatedProduct);

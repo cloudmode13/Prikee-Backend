@@ -34,6 +34,9 @@ const serviceItemSchema = new mongoose.Schema({
   serviceGst: {
     type: String,
   },
+  imagePath: {
+    type: String,
+  },
 });
 
 const Service = mongoose.model('serviceItemSchema', serviceItemSchema);

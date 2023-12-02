@@ -1,14 +1,35 @@
 import express from 'express';
-import { handleServicePost, handleServiceGet, handleServiceUpdate, handleServiceDelete } from '../../controllers/Item/serviceInv.js';
+import multer from 'multer';
+import path from 'path';
+import {
+  handleServicePost,
+  handleServiceGet,
+  handleServiceUpdate,
+  handleServiceDelete,
+} from '../../controllers/Item/serviceInv.js';
 
 const router = express.Router();
 
-router.post("/", handleServicePost);
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'service/ServiceImages');
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + '-' + Date.now() + path.extname(file.originalname),
+    );
+  },
+});
 
-router.get("/", handleServiceGet)
+const upload = multer({ storage: storage });
 
-router.put("/:id", handleServiceUpdate)
+router.post('/', upload.single('serviceImage'), handleServicePost);
 
-router.delete("/:id", handleServiceDelete)
+router.get('/', handleServiceGet);
+
+router.put('/:id', upload.single('serviceImage'), handleServiceUpdate);
+
+router.delete('/:id', handleServiceDelete);
 
 export default router;

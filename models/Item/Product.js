@@ -19,9 +19,9 @@ const productItemSchema = new mongoose.Schema({
   itemDescription: {
     type: String,
   },
-  hsn: {
-    type: String,
-  },
+  // hsn: {
+  //   type: String,
+  // },
   unit: {
     type: String,
   },
@@ -52,11 +52,10 @@ const productItemSchema = new mongoose.Schema({
   purchaseGst: {
     type: String,
   },
-  imageData: [
-    {
-      imagePath: String,
-    },
-  ],
+
+  imagePath: {
+    type: String,
+  },
 });
 
 const Product = mongoose.model('productItemSchema', productItemSchema);

@@ -14,6 +14,8 @@ export async function handleServicePost(req, res) {
     serviceGst,
   } = req.body;
 
+  const imagePath = req.file ? req.file.filename : null;
+
   const data = {
     serviceName,
     category,
@@ -25,6 +27,7 @@ export async function handleServicePost(req, res) {
     srvSalesTax,
     sacCode,
     serviceGst,
+    imagePath,
   };
 
   try {
@@ -53,10 +56,12 @@ export async function handleServiceGet(req, res) {
 }
 
 export async function handleServiceUpdate(req, res) {
+  const imagePath = req.file ? req.file.filename : null;
+
   try {
     const updatedService = await Service.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { ...req.body, imagePath },
       { new: true },
     );
     console.log('hello' + updatedService);

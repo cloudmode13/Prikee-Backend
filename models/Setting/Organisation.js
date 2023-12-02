@@ -34,6 +34,9 @@ const organisationSchema = new mongoose.Schema({
   panNumber: {
     type: String,
   },
+  imagePath: {
+    type: String,
+  },
 });
 
 export default mongoose.model('Organisation', organisationSchema);

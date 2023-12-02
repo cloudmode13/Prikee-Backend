@@ -14,6 +14,8 @@ export async function handleOrganisationPost(req, res) {
     ifscCode,
     panNumber,
   } = req.body;
+
+  const imagePath = req.file ? req.file.filename : null;
   const data = {
     organisationName,
     address,
@@ -26,6 +28,7 @@ export async function handleOrganisationPost(req, res) {
     branch,
     ifscCode,
     panNumber,
+    imagePath,
   };
   try {
     const organisation = await Organisation.create(data);
@@ -51,10 +54,12 @@ export async function handleOrganisationGet(req, res) {
 }
 
 export async function handleOrganisationEdit(req, res) {
+  const imagePath = req.file ? req.file.filename : null;
+
   try {
     const updatedOrganisation = await Organisation.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { ...req.body, imagePath },
       { new: true },
     );
     return res

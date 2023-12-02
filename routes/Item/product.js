@@ -1,14 +1,38 @@
 import express from 'express';
-import { handleProductPost,handleProductGet, handleProductUpdate, handleProductDelete  } from '../../controllers/Item/product.js';
+import multer from 'multer';
+import path from 'path';
+
+import {
+  handleProductPost,
+  handleProductGet,
+  handleProductUpdate,
+  handleProductDelete,
+} from '../../controllers/Item/product.js';
+
+const app = express();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'product/Images');
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + '-' + Date.now() + path.extname(file.originalname),
+    );
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const router = express.Router();
 
-router.post("/", handleProductPost);
+router.post('/', upload.single('productImage'), handleProductPost);
 
-router.get("/", handleProductGet)
+router.get('/', handleProductGet);
 
-router.put("/:id", handleProductUpdate)
+router.put('/:id', upload.single('productImage'), handleProductUpdate);
 
-router.delete("/:id", handleProductDelete)
+router.delete('/:id', handleProductDelete);
 
 export default router;

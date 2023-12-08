@@ -24,6 +24,7 @@ import quotationRouter from './routes/SalesInvoice/Quotation.js';
 import quoInvItemRouter from './routes/SalesInvoice/QuoInvItem.js';
 import dcRouter from './routes/SalesInvoice/DeliveryChallan.js';
 import paidStatusRouter from './routes/SalesInvoice/PaidStatus.js';
+import salesReturnRouter from './routes/SalesInvoice/SalesReturn.js';
 
 const app = express();
 app.use(cors());
@@ -33,9 +34,6 @@ app.use(express.static('service'));
 app.use(express.static('Organisation'));
 
 const port = process.env.PORT || 8000;
-
-// const mongourl =
-//   "mongodb+srv://aruncloudmode:mf2XZuraVUoVEAI6@cluster0.mvermhl.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose
   .connect(process.env.MONGOURL, {
@@ -88,6 +86,8 @@ app.use('/quotation', quotationRouter);
 app.use('/deliveryChallan', dcRouter);
 
 app.use('/paidStatus', paidStatusRouter);
+
+app.use('/salesReturn', salesReturnRouter);
 
 app.get('/', (req, res) => {
   console.log('hello cloud');

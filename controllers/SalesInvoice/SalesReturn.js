@@ -17,9 +17,9 @@ export async function handleSRPost(req, res) {
     if (salesReturn) {
       res
         .status(201)
-        .send({ message: 'Party created successfully', data: salesReturn });
+        .send({ message: 'SR created successfully', data: salesReturn });
     } else {
-      res.status(400).send({ message: 'Party creation failed' });
+      res.status(400).send({ message: 'SR creation failed' });
     }
   } catch (e) {
     console.log(e);
@@ -32,5 +32,22 @@ export async function handleSRGet(req, res) {
     res.send({ data: salesReturn });
   } catch (e) {
     console.log(e);
+  }
+}
+
+export async function handleSRDelete(req, res) {
+  try {
+    const deletedSalesReturn = await SalesReturn.findByIdAndDelete(
+      req.params.id,
+    );
+
+    if (!deletedSalesReturn) {
+      return res.status(404).send({ message: 'SR not found' });
+    }
+
+    return res.status(200).send({ message: 'Successfully deleted' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ message: 'Server error' });
   }
 }

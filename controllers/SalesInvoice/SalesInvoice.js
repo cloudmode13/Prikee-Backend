@@ -1,4 +1,5 @@
 import SalesInvoice from '../../models/SalesInvoice/SalesInvoice.js';
+import Product from '../../models/Item/Product.js';
 
 export async function handleSalesInvoicePost(req, res) {
   if (!req.body) {
@@ -45,6 +46,17 @@ export async function handleSalesInvoicePost(req, res) {
   console.log(32, data);
 
   try {
+    for (const item of inventoryItem) {
+      const product = await Product.findOne({ itemName: item.itemName });
+
+      if (product) {
+        const quantity = item.quantity || 0;
+        product.openingStock -= quantity;
+
+        // Save the updated product back to the database
+        await product.save();
+      }
+    }
     const salesInvoice = await SalesInvoice.create(data);
     console.log(104, salesInvoice);
     if (salesInvoice) {

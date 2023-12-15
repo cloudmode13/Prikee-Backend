@@ -1,4 +1,6 @@
 import SalesReturn from '../../models/SalesInvoice/SalesReturn.js';
+import SalesInvoice from '../../models/SalesInvoice/SalesInvoice.js';
+import Product from '../../models/Item/Product.js';
 
 export async function handleSRPost(req, res) {
   const { returnDate, reason, returnData } = req.body;
@@ -13,16 +15,38 @@ export async function handleSRPost(req, res) {
   console.log(32, data);
 
   try {
+    for (const item of returnData.inventoryItem) {
+      const product = await Product.findOne({ itemName: item.itemName });
+
+      if (product) {
+        const quantity = item.quantity || 0;
+        product.openingStock =
+          parseFloat(product.openingStock) + parseFloat(quantity);
+        await product.save();
+      }
+    }
+
     const salesReturn = await SalesReturn.create(data);
     if (salesReturn) {
-      res
-        .status(201)
-        .send({ message: 'SR created successfully', data: salesReturn });
+      const removedItem = await SalesInvoice.findOneAndDelete({
+        _id: returnData._id,
+      });
+      if (removedItem) {
+        res
+          .status(201)
+          .send({ message: 'SR created successfully', data: salesReturn });
+      } else {
+        res.status(400).send({ message: 'Item not found in salesData' });
+      }
+      // res
+      //   .status(201)
+      //   .send({ message: 'SR created successfully', data: salesReturn });
     } else {
       res.status(400).send({ message: 'SR creation failed' });
     }
   } catch (e) {
     console.log(e);
+    res.status(500).send({ message: 'Internal Server Error' });
   }
 }
 

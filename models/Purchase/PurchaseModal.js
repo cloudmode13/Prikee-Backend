@@ -13,6 +13,23 @@ const purchaseSchema = new mongoose.Schema({
   remarks: {
     type: String,
   },
+  itemsData: [
+    {
+      itemName: String,
+      itemCode: String,
+      quantity: String,
+      purchasePrice: String,
+    },
+  ],
+  subTotal: {
+    type: String,
+  },
+  purchasedGst: {
+    type: String,
+  },
+  total: {
+    type: String,
+  },
 });
 
 export default mongoose.model('Purchase', purchaseSchema);

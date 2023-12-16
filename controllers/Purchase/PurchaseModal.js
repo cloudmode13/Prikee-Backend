@@ -1,13 +1,26 @@
 import Purchase from '../../models/Purchase/PurchaseModal.js';
 
 export async function handlePurchasePost(req, res) {
-  const { vendorName, purchaseOrderNumber, purchaseDate, remarks } = req.body;
+  const {
+    vendorName,
+    purchaseOrderNumber,
+    purchaseDate,
+    remarks,
+    itemsData,
+    subTotal,
+    purchasedGst,
+    total,
+  } = req.body;
 
   const data = {
     vendorName,
     purchaseOrderNumber,
     purchaseDate,
     remarks,
+    itemsData,
+    subTotal,
+    purchasedGst,
+    total,
   };
 
   try {

@@ -26,6 +26,7 @@ import dcRouter from './routes/SalesInvoice/DeliveryChallan.js';
 import paidStatusRouter from './routes/SalesInvoice/PaidStatus.js';
 import salesReturnRouter from './routes/SalesInvoice/SalesReturn.js';
 import purchaseRouter from './routes/Purchase/PurchaseModal.js';
+import paymentOutRouter from './routes/Purchase/Payment_Out.js';
 
 const app = express();
 app.use(cors());
@@ -91,6 +92,8 @@ app.use('/paidStatus', paidStatusRouter);
 app.use('/salesReturn', salesReturnRouter);
 
 app.use('/purchase', purchaseRouter);
+
+app.use('/paymentOut', paymentOutRouter);
 
 app.get('/', (req, res) => {
   console.log('hello cloud');

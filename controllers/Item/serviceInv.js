@@ -12,6 +12,7 @@ export async function handleServicePost(req, res) {
     srvSalesTax,
     sacCode,
     serviceGst,
+    basicServiceSalesPrice,
   } = req.body;
 
   const imagePath = req.file ? req.file.filename : null;
@@ -28,6 +29,7 @@ export async function handleServicePost(req, res) {
     sacCode,
     serviceGst,
     imagePath,
+    basicServiceSalesPrice,
   };
 
   try {

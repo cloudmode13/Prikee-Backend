@@ -19,6 +19,8 @@ export async function handleProductPost(req, res) {
     purchaseTax,
     salesGst,
     purchaseGst,
+    basicSalesPrice,
+    basicPurchasePrice,
   } = req.body;
 
   const imagePath = req.file ? req.file.filename : null;
@@ -42,6 +44,8 @@ export async function handleProductPost(req, res) {
       salesGst,
       purchaseGst,
       imagePath,
+      basicSalesPrice,
+      basicPurchasePrice,
     };
 
     const productItem = await Product.create(data);

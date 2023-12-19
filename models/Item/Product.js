@@ -31,6 +31,12 @@ const productItemSchema = new mongoose.Schema({
   date: {
     type: String,
   },
+  basicSalesPrice: {
+    type: String,
+  },
+  basicPurchasePrice: {
+    type: String,
+  },
   salesPrice: {
     type: String,
   },

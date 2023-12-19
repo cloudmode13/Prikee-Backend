@@ -22,6 +22,9 @@ const serviceItemSchema = new mongoose.Schema({
   unit: {
     type: String,
   },
+  basicServiceSalesPrice: {
+    type: String,
+  },
   serviceSalesPrice: {
     type: String,
   },

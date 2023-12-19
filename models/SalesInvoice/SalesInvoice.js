@@ -34,6 +34,7 @@ const salesInvoiceSchema = new mongoose.Schema({
   inventoryItem: [
     {
       itemName: String,
+      itemCode: String,
       salesPrice: String,
       salesGst: String,
       quantity: String,

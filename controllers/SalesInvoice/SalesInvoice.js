@@ -47,7 +47,7 @@ export async function handleSalesInvoicePost(req, res) {
 
   try {
     for (const item of inventoryItem) {
-      const product = await Product.findOne({ itemName: item.itemName });
+      const product = await Product.findOne({ itemCode: item.itemCode });
 
       if (product) {
         const quantity = item.quantity || 0;

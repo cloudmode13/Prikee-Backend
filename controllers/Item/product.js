@@ -66,20 +66,26 @@ export async function handleProductGet(req, res) {
   try {
     const productItem = await Product.find({});
     res.send({ data: productItem });
-    console.log(1, productItem);
+    // console.log(1, productItem);
   } catch (e) {
     console.log(e);
   }
 }
 
 export async function handleProductUpdate(req, res) {
-  const imagePath = req.file ? req.file.filename : null;
-  console.log('upd', imagePath, req.body);
+  let updateData = { ...req.body };
+
+  if (req.file) {
+    // If a new file is uploaded, include imagePath in the update
+    updateData.imagePath = req.file.filename;
+  }
+  // const imagePath = req.file ? req.file.filename : null;
+  // console.log('upd', imagePath, req.body);
+  console.log(85, updateData);
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-
-      { ...req.body, imagePath },
+      updateData,
       { new: true },
     );
     console.log('hello' + updatedProduct);

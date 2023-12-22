@@ -28,6 +28,8 @@ import salesReturnRouter from './routes/SalesInvoice/SalesReturn.js';
 import purchaseRouter from './routes/Purchase/PurchaseModal.js';
 import paymentOutRouter from './routes/Purchase/Payment_Out.js';
 import purchaseReturnRouter from './routes/Purchase/Purchase_Return.js';
+import expensesRouter from './routes/Expenses/Expenses.js';
+import cashBankRouter from './routes/Cash_Bank/Cash_Bank.js';
 
 const app = express();
 app.use(cors());
@@ -97,6 +99,10 @@ app.use('/purchase', purchaseRouter);
 app.use('/paymentOut', paymentOutRouter);
 
 app.use('/purchaseReturn', purchaseReturnRouter);
+
+app.use('/expenses', expensesRouter);
+
+app.use('/cashBank', cashBankRouter);
 
 app.get('/', (req, res) => {
   console.log('hello cloud');

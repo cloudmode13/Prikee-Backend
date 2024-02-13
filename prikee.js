@@ -30,6 +30,7 @@ import paymentOutRouter from './routes/Purchase/Payment_Out.js';
 import purchaseReturnRouter from './routes/Purchase/Purchase_Return.js';
 import expensesRouter from './routes/Expenses/Expenses.js';
 import cashBankRouter from './routes/Cash_Bank/Cash_Bank.js';
+import authRouter from './routes/User/auth.route.js';
 
 const app = express();
 app.use(cors());
@@ -38,7 +39,7 @@ app.use(express.static('product'));
 app.use(express.static('service'));
 app.use(express.static('Organisation'));
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 7000;
 
 mongoose
   .connect(process.env.MONGOURL, {
@@ -104,8 +105,20 @@ app.use('/expenses', expensesRouter);
 
 app.use('/cashBank', cashBankRouter);
 
-app.get('/', (req, res) => {
-  console.log('hello cloud');
+app.use('/auth', authRouter);
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  return res.status(statusCode).json({
+    success: false,
+    message,
+    statusCode,
+  });
 });
+
+// app.get('/', (req, res) => {
+//   console.log('hello cloud');
+// });
 
 app.listen(port, () => console.log(`Listening to localhost: ${port}`));

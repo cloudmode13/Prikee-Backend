@@ -46,10 +46,11 @@ export async function handleOrganisationPost(req, res) {
 export async function handleOrganisationGet(req, res) {
   try {
     const organisation = await Organisation.find({});
-    res.send({ data: organisation });
     console.log(1, organisation);
+    return res.status(200).send({ data: organisation });
   } catch (e) {
     console.log(e);
+    return res.status(500).send({ message: 'Server error' });
   }
 }
 

@@ -47,6 +47,8 @@ const salesInvoiceSchema = new mongoose.Schema({
   subTotal: { type: String },
   paidMode: String,
   gst: { type: String },
+  cgst: { type: String },
+  cgstValue: { type: String },
 });
 
 export default mongoose.model('SalesInvoice', salesInvoiceSchema);

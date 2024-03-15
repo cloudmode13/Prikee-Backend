@@ -14,6 +14,8 @@ export async function handleQuotationPost(req, res) {
     subTotal,
     total,
     gst,
+    cgst,
+    cgstValue,
   } = req.body;
   console.log(19, req.body);
 
@@ -30,6 +32,8 @@ export async function handleQuotationPost(req, res) {
     subTotal,
     total,
     gst,
+    cgst,
+    cgstValue,
   };
 
   console.log(32, data);

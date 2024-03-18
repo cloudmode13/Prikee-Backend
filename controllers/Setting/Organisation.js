@@ -13,6 +13,7 @@ export async function handleOrganisationPost(req, res) {
     branch,
     ifscCode,
     panNumber,
+    website,
   } = req.body;
 
   const imagePath = req.file ? req.file.filename : null;
@@ -29,6 +30,7 @@ export async function handleOrganisationPost(req, res) {
     ifscCode,
     panNumber,
     imagePath,
+    website,
   };
   try {
     const organisation = await Organisation.create(data);

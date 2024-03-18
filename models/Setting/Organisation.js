@@ -37,6 +37,9 @@ const organisationSchema = new mongoose.Schema({
   imagePath: {
     type: String,
   },
+  website: {
+    type: String,
+  },
 });
 
 export default mongoose.model('Organisation', organisationSchema);

@@ -31,6 +31,7 @@ const salesInvoiceSchema = new mongoose.Schema({
   subject: {
     type: String,
   },
+  terms: { type: String },
   inventoryItem: [
     {
       itemName: String,

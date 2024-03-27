@@ -31,6 +31,7 @@ import purchaseReturnRouter from './routes/Purchase/Purchase_Return.js';
 import expensesRouter from './routes/Expenses/Expenses.js';
 import cashBankRouter from './routes/Cash_Bank/Cash_Bank.js';
 import authRouter from './routes/User/auth.route.js';
+import quoNumRouter from './routes/SalesInvoice/Quo_Number.router.js';
 
 const app = express();
 app.use(cors());
@@ -88,6 +89,8 @@ app.use('/quoInvItem', quoInvItemRouter);
 app.use('/organisation', organisation);
 
 app.use('/quotation', quotationRouter);
+
+app.use('/quoNum', quoNumRouter);
 
 app.use('/deliveryChallan', dcRouter);
 

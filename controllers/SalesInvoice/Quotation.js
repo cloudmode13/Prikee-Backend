@@ -59,7 +59,6 @@ export async function handleQuotationGet(req, res) {
   try {
     const quotation = await Quotation.find({});
     res.send({ data: quotation });
-    console.log(1, quotation);
   } catch (e) {
     console.log(e);
   }

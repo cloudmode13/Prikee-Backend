@@ -9,7 +9,6 @@ export async function handleCustomerNamePost(req, res) {
     const customerName = await CustomerName.create(data);
     if (customerName) {
       res.send({ data: customerName });
-      console.log('demo', customerName);
     } else {
       res.send({ message: 'not ok' });
     }
@@ -22,7 +21,6 @@ export async function handleCustomerNameGet(req, res) {
   try {
     const customerName = await CustomerName.find({});
     res.send({ data: customerName });
-    console.log(1, customerName);
   } catch (e) {
     console.log(e);
   }

@@ -11,7 +11,6 @@ export async function handleCatagorySrvPost(req, res) {
     const categoryInventory = await CategoryService.create(data);
     if (categoryInventory) {
       res.send({ data: categoryInventory });
-      console.log('demo', categoryInventory);
     } else {
       res.send({ message: 'not ok' });
     }
@@ -24,7 +23,6 @@ export async function handleCatagorySrvGet(req, res) {
   try {
     const categoryInventory = await CategoryService.find({});
     res.send({ data: categoryInventory });
-    console.log(1, categoryInventory);
   } catch (e) {
     console.log(e);
   }

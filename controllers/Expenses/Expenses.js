@@ -12,7 +12,6 @@ export async function handleExpensesPost(req, res) {
 
   try {
     const expensesData = await Expenses.create(data);
-    console.log('exp', expensesData);
     if (expensesData) {
       res.status(200).send({
         Message: 'expesesData create successfully',

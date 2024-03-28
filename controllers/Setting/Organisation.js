@@ -36,7 +36,6 @@ export async function handleOrganisationPost(req, res) {
     const organisation = await Organisation.create(data);
     if (organisation) {
       res.send({ data: organisation });
-      console.log('demo', organisation);
     } else {
       res.send({ message: 'not ok' });
     }
@@ -48,7 +47,6 @@ export async function handleOrganisationPost(req, res) {
 export async function handleOrganisationGet(req, res) {
   try {
     const organisation = await Organisation.find({});
-    console.log(1, organisation);
     return res.status(200).send({ data: organisation });
   } catch (e) {
     console.log(e);

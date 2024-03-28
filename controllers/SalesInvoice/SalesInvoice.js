@@ -26,7 +26,6 @@ export async function handleSalesInvoicePost(req, res) {
     cgstValue,
     paidMode,
   } = req.body;
-  console.log(19, req.body);
 
   const data = {
     clientName,
@@ -49,8 +48,6 @@ export async function handleSalesInvoicePost(req, res) {
     paidMode,
   };
 
-  console.log(32, data);
-
   try {
     for (const item of inventoryItem) {
       const product = await Product.findOne({ itemCode: item.itemCode });
@@ -64,7 +61,6 @@ export async function handleSalesInvoicePost(req, res) {
       }
     }
     const salesInvoice = await SalesInvoice.create(data);
-    console.log(104, salesInvoice);
     if (salesInvoice) {
       res
         .status(201)
@@ -81,7 +77,6 @@ export async function handleSalesInvoiceGet(req, res) {
   try {
     const salesInvoice = await SalesInvoice.find({});
     res.send({ data: salesInvoice });
-    console.log(1, salesInvoice);
   } catch (e) {
     console.log(e);
   }

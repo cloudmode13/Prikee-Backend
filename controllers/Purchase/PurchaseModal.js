@@ -25,7 +25,6 @@ export async function handlePurchasePost(req, res) {
 
   try {
     const purchaseData = await Purchase.create(data);
-    console.log(15, purchaseData);
     if (purchaseData) {
       res.status(200).send({
         message: 'PurchaseData created successfully',

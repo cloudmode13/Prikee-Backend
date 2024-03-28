@@ -34,7 +34,6 @@ export async function handleServicePost(req, res) {
 
   try {
     const serviceItem = await Service.create(data);
-    console.log(104, serviceItem);
     if (serviceItem) {
       res
         .status(201)
@@ -51,7 +50,6 @@ export async function handleServiceGet(req, res) {
   try {
     const serviceItem = await Service.find({});
     res.send({ data: serviceItem });
-    console.log(1, serviceItem);
   } catch (e) {
     console.log(e);
   }
@@ -66,7 +64,6 @@ export async function handleServiceUpdate(req, res) {
       { ...req.body, imagePath },
       { new: true },
     );
-    console.log('hello' + updatedService);
     if (!updatedService) {
       return res.status(404).send({ message: 'ServiceItem not found' });
     }

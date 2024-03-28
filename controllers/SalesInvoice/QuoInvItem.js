@@ -12,7 +12,6 @@ export async function handleQuoInvItemPost(req, res) {
 
   try {
     const quoInvItem = await QuoInvItem.create(data);
-    console.log(15, quoInvItem);
     if (quoInvItem) {
       res
         .status(201)
@@ -29,7 +28,6 @@ export async function handleQuoInvItemGet(req, res) {
   try {
     const quoInvItem = await QuoInvItem.find({});
     res.send({ data: quoInvItem });
-    console.log(1, quoInvItem);
   } catch (e) {
     console.log(e);
   }

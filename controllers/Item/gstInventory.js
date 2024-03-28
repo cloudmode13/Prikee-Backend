@@ -11,7 +11,6 @@ export async function handleGSTInvtPost(req, res) {
     const invGST = await GSTInventory.create(data);
     if (invGST) {
       res.send({ data: invGST });
-      console.log('demo', invGST);
     } else {
       res.send({ message: 'not ok' });
     }
@@ -24,7 +23,6 @@ export async function handleGSTInvtGet(req, res) {
   try {
     const invGST = await GSTInventory.find({});
     res.send({ data: invGST });
-    console.log(1, invGST);
   } catch (e) {
     console.log(e);
   }

@@ -11,7 +11,6 @@ export async function handleSrvOthersPost(req, res) {
     const srvOthersInv = await SrvOthersInv.create(data);
     if (srvOthersInv) {
       res.send({ data: srvOthersInv });
-      console.log(srvOthersInv);
     } else {
       res.send({ message: 'not ok' });
     }

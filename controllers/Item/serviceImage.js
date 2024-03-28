@@ -15,7 +15,6 @@ export async function handleServiceImagePost(req, res) {
 
   try {
     const serviceImage = await ServiceImage.create(data);
-    console.log(104, serviceImage);
     if (serviceImage) {
       res
         .status(201)
@@ -32,7 +31,6 @@ export async function handleServiceImageGet(req, res) {
   try {
     const serviceImage = await ServiceImage.find({});
     res.send({ data: serviceImage });
-    console.log(1, serviceImage);
   } catch (e) {
     console.log(e);
   }
@@ -40,10 +38,7 @@ export async function handleServiceImageGet(req, res) {
 
 export async function handleServiceImageUpdate(req, res) {
   const { id } = req.params;
-  console.log(45, req.body);
   try {
-    console.log(47, req.file.path);
-
     // Find the existing product image
     const existingServiceImage = await ServiceImage.findById(id);
 

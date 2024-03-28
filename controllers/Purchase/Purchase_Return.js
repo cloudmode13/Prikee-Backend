@@ -3,15 +3,12 @@ import Purchase from '../../models/Purchase/PurchaseModal.js';
 
 export async function handlePRPost(req, res) {
   const { returnDate, reason, returnData } = req.body;
-  console.log(19, req.body);
 
   const data = {
     returnDate,
     reason,
     returnData,
   };
-
-  console.log(32, data);
 
   try {
     const purchaseReturn = await PurchaseReturn.create(data);

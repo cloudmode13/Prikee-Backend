@@ -11,7 +11,6 @@ export async function handleCatagoryPost(req, res) {
     const createCategory = await CreateCategory.create(data);
     if (createCategory) {
       res.send({ data: createCategory });
-      console.log('demo', createCategory);
     } else {
       res.send({ message: 'not ok' });
     }
@@ -24,7 +23,6 @@ export async function handleCatagoryGet(req, res) {
   try {
     const createCategory = await CreateCategory.find({});
     res.send({ data: createCategory });
-    console.log(1, createCategory);
   } catch (e) {
     console.log(e);
   }
@@ -35,8 +33,6 @@ export async function handleCategoryDelete(req, res) {
     const deletedCategory = await CreateCategory.findByIdAndDelete(
       req.params.id,
     );
-
-    console.log(deletedCategory);
 
     if (!deletedCategory) {
       return res.status(404).send({ message: 'Category not found' });

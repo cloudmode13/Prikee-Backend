@@ -12,7 +12,6 @@ export async function handleInventoryItemPost(req, res) {
 
   try {
     const inventoryItem = await InventoryItem.create(data);
-    console.log(15, inventoryItem);
     if (inventoryItem) {
       res
         .status(201)
@@ -29,7 +28,6 @@ export async function handleInventoryItemGet(req, res) {
   try {
     const inventoryItem = await InventoryItem.find({});
     res.send({ data: inventoryItem });
-    console.log(1, inventoryItem);
   } catch (e) {
     console.log(e);
   }

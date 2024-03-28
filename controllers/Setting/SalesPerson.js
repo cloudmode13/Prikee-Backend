@@ -10,7 +10,6 @@ export async function handleSalesPersonPost(req, res) {
     const salesPerson = await SalesPerson.create(data);
     if (salesPerson) {
       res.send({ data: salesPerson });
-      console.log('demo', salesPerson);
     } else {
       res.send({ message: 'not ok' });
     }
@@ -23,7 +22,6 @@ export async function handleSalesPersonGet(req, res) {
   try {
     const salesPerson = await SalesPerson.find({});
     res.send({ data: salesPerson });
-    console.log(1, salesPerson);
   } catch (e) {
     console.log(e);
   }

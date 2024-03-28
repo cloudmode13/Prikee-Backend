@@ -9,7 +9,6 @@ export async function handleDCPost(req, res) {
     termsOfDelivery,
     dcData,
   } = req.body;
-  console.log(19, req.body);
 
   const data = {
     delNoteNo,
@@ -20,11 +19,8 @@ export async function handleDCPost(req, res) {
     dcData,
   };
 
-  console.log(32, data);
-
   try {
     const deliveryChallan = await DeliveryChallan.create(data);
-    console.log(104, deliveryChallan);
     if (deliveryChallan) {
       res
         .status(201)
@@ -41,7 +37,6 @@ export async function handleDCGet(req, res) {
   try {
     const deliveryChallan = await DeliveryChallan.find({});
     res.send({ data: deliveryChallan });
-    console.log(1, deliveryChallan);
   } catch (e) {
     console.log(e);
   }

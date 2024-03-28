@@ -11,7 +11,6 @@ export async function handleCatagoryInvtPost(req, res) {
     const categoryInventory = await CategoryInventory.create(data);
     if (categoryInventory) {
       res.send({ data: categoryInventory });
-      console.log('demo', categoryInventory);
     } else {
       res.send({ message: 'not ok' });
     }
@@ -24,7 +23,6 @@ export async function handleCatagoryInvtGet(req, res) {
   try {
     const categoryInventory = await CategoryInventory.find({});
     res.send({ data: categoryInventory });
-    console.log(1, categoryInventory);
   } catch (e) {
     console.log(e);
   }
@@ -35,8 +33,6 @@ export async function handleCategoryInvtDelete(req, res) {
     const deletedCategoryInvt = await CategoryInventory.findByIdAndDelete(
       req.params.id,
     );
-
-    console.log(deletedCategoryInvt);
 
     if (!deletedCategoryInvt) {
       return res.status(404).send({ message: 'Category not found' });

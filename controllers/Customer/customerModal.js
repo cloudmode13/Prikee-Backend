@@ -33,7 +33,6 @@ export async function handleCustomerPost(req, res) {
 
   try {
     const parties = await CustomerModal.create(data);
-    console.log(104, parties);
     if (parties) {
       res
         .status(201)
@@ -50,7 +49,6 @@ export async function handleCustomerGet(req, res) {
   try {
     const customers = await CustomerModal.find({});
     res.send({ data: customers });
-    console.log(1, customers);
   } catch (e) {
     console.log(e);
   }
@@ -63,7 +61,6 @@ export async function handleCustomerUpdate(req, res) {
       req.body,
       { new: true },
     );
-    console.log('hello', updatedCustomer);
     if (!updatedCustomer) {
       return res.status(404).send({ message: 'Party not found' });
     }

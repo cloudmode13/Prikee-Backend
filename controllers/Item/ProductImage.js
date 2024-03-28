@@ -10,7 +10,6 @@ export async function handleProductImagePost(req, res) {
 
   try {
     const productImage = await ProductImage.create(data);
-    console.log(104, productImage);
     if (productImage) {
       res
         .status(200)
@@ -27,7 +26,6 @@ export async function handleProductImageGet(req, res) {
   try {
     const productImage = await ProductImage.find({});
     res.send({ data: productImage });
-    console.log(1, productImage);
   } catch (e) {
     console.log(e);
   }
@@ -35,10 +33,7 @@ export async function handleProductImageGet(req, res) {
 
 export async function handleProductImageUpdate(req, res) {
   const { id } = req.params;
-  console.log(45, req.body);
   try {
-    console.log(47, req.file.path);
-
     // Find the existing product image
     const existingProductImage = await ProductImage.findById(id);
 
@@ -61,13 +56,9 @@ export async function handleProductImageUpdate(req, res) {
       { new: true },
     );
 
-    console.log(53, updatedProductImage, req.file.path);
-
     if (!updatedProductImage) {
       return res.status(404).send({ message: 'Party not found' });
     }
-
-    console.log(57, updatedProductImage.imagePath);
 
     return res
       .status(200)

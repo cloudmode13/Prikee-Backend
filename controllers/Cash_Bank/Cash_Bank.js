@@ -12,7 +12,6 @@ export async function handleCBPost(req, res) {
 
   try {
     const cashBankData = await CashBank.create(data);
-    console.log('exp', cashBankData);
     if (cashBankData) {
       res.status(200).send({
         message: 'cashBankData create successfully',

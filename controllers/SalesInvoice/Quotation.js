@@ -18,7 +18,6 @@ export async function handleQuotationPost(req, res) {
     cgst,
     cgstValue,
   } = req.body;
-  console.log(19, req.body);
 
   const data = {
     clientName,
@@ -38,11 +37,8 @@ export async function handleQuotationPost(req, res) {
     cgstValue,
   };
 
-  console.log(32, data);
-
   try {
     const quotation = await Quotation.create(data);
-    console.log(104, quotation);
     if (quotation) {
       res
         .status(201)

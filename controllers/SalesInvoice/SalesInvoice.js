@@ -76,7 +76,12 @@ export async function handleSalesInvoicePost(req, res) {
 export async function handleSalesInvoiceGet(req, res) {
   try {
     const salesInvoice = await SalesInvoice.find({});
-    res.send({ data: salesInvoice });
+    const latestInvoiceNumber = await SalesInvoice.findOne().sort({ _id: -1 });
+
+    res.send({
+      data: salesInvoice,
+      latestInvoiceNumber: latestInvoiceNumber.invoiceNumber,
+    });
   } catch (e) {
     console.log(e);
   }

@@ -54,7 +54,12 @@ export async function handleQuotationPost(req, res) {
 export async function handleQuotationGet(req, res) {
   try {
     const quotation = await Quotation.find({});
-    res.send({ data: quotation });
+    const latestQuoNumber = await Quotation.findOne().sort({ _id: -1 });
+    console.log(58, latestQuoNumber.quotationNumber);
+    res.send({
+      data: quotation,
+      latestQuoNumber: latestQuoNumber.quotationNumber,
+    });
   } catch (e) {
     console.log(e);
   }

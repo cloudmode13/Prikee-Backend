@@ -46,6 +46,7 @@ export async function handleClientPost(req, res) {
 export async function handleClientGet(req, res) {
   try {
     const client = await ClientModal.find({});
+    console.log(client);
     res.send({ data: client });
   } catch (e) {
     console.log(e);

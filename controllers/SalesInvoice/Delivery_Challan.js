@@ -36,7 +36,13 @@ export async function handleDCPost(req, res) {
 export async function handleDCGet(req, res) {
   try {
     const deliveryChallan = await DeliveryChallan.find({});
-    res.send({ data: deliveryChallan });
+
+    const latestDCNumber = await DeliveryChallan.findOne().sort({ _id: -1 });
+
+    res.send({
+      data: deliveryChallan,
+      latestDCNumber: latestDCNumber.delNoteNo,
+    });
   } catch (e) {
     console.log(e);
   }

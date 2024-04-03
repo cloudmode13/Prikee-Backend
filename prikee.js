@@ -28,6 +28,7 @@ import salesReturnRouter from './routes/SalesInvoice/SalesReturn.js';
 import purchaseRouter from './routes/Purchase/PurchaseModal.js';
 import paymentOutRouter from './routes/Purchase/Payment_Out.js';
 import purchaseReturnRouter from './routes/Purchase/Purchase_Return.js';
+import purchaseOrderRouter from './routes/Purchase/Purchase_Order_Route.js';
 import expensesRouter from './routes/Expenses/Expenses.js';
 import cashBankRouter from './routes/Cash_Bank/Cash_Bank.js';
 import authRouter from './routes/User/auth.route.js';
@@ -103,6 +104,8 @@ app.use('/purchase', purchaseRouter);
 app.use('/paymentOut', paymentOutRouter);
 
 app.use('/purchaseReturn', purchaseReturnRouter);
+
+app.use('/purchaseOrder', purchaseOrderRouter);
 
 app.use('/expenses', expensesRouter);
 

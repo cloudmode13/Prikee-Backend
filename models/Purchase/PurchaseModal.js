@@ -4,7 +4,7 @@ const purchaseSchema = new mongoose.Schema({
   vendorName: {
     type: String,
   },
-  purchaseOrderNumber: {
+  purchaseInvoiceNumber: {
     type: String,
   },
   purchaseDate: {
@@ -30,6 +30,8 @@ const purchaseSchema = new mongoose.Schema({
   total: {
     type: String,
   },
+  cgst: { type: String },
+  cgstValue: { type: String },
 });
 
 export default mongoose.model('Purchase', purchaseSchema);

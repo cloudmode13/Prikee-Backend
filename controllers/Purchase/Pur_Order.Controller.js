@@ -62,9 +62,7 @@ export async function handlePOUpdate(req, res) {
 
 export async function handlePODelete(req, res) {
   try {
-    const deletedPurchaseOrder = await Purchase.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedPurchaseOrder = await PO.findByIdAndDelete(req.params.id);
 
     if (!deletedPurchaseOrder) {
       return res.status(404).send({ message: 'PO not found' });

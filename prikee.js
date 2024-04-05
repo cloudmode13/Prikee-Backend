@@ -33,6 +33,8 @@ import expensesRouter from './routes/Expenses/Expenses.js';
 import cashBankRouter from './routes/Cash_Bank/Cash_Bank.js';
 import authRouter from './routes/User/auth.route.js';
 import quoNumRouter from './routes/SalesInvoice/Quo_Number.router.js';
+import paidToCtgyRouter from './routes/Expenses/PaidToCategory_Router.js';
+import creditNoteRouter from './routes/SalesInvoice/CreditNote_Router.js';
 
 const app = express();
 app.use(cors());
@@ -99,6 +101,8 @@ app.use('/paidStatus', paidStatusRouter);
 
 app.use('/salesReturn', salesReturnRouter);
 
+app.use('/creditNote', creditNoteRouter);
+
 app.use('/purchase', purchaseRouter);
 
 app.use('/paymentOut', paymentOutRouter);
@@ -108,6 +112,8 @@ app.use('/purchaseReturn', purchaseReturnRouter);
 app.use('/purchaseOrder', purchaseOrderRouter);
 
 app.use('/expenses', expensesRouter);
+
+app.use('/paidToCtgyRouter', paidToCtgyRouter);
 
 app.use('/cashBank', cashBankRouter);
 

@@ -1,13 +1,15 @@
 import Expenses from '../../models/Expenses/Expenses.js';
 
 export async function handleExpensesPost(req, res) {
-  const { description, paidTo, amount, remarks } = req.body;
+  const { description, paidTo, amount, remarks, date, paidMode } = req.body;
 
   const data = {
     description,
     paidTo,
+    date,
     amount,
     remarks,
+    paidMode,
   };
 
   try {

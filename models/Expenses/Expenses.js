@@ -7,10 +7,16 @@ const expensesSchema = new mongoose.Schema({
   paidTo: {
     type: String,
   },
+  date: {
+    type: String,
+  },
   amount: {
     type: String,
   },
   remarks: {
+    type: String,
+  },
+  paidMode: {
     type: String,
   },
 });

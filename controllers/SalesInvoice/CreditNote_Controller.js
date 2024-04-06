@@ -31,7 +31,9 @@ export async function handleCdnPost(req, res) {
 export async function handleCdnGet(req, res) {
   try {
     const creditNote = await CreditNote.find({});
-    res.send({ data: creditNote });
+    const latestCdnNumber = await CreditNote.findOne().sort({ _id: -1 });
+
+    res.send({ data: creditNote, latestCdnNumber: latestCdnNumber.cdnNum });
   } catch (e) {
     console.log(e);
   }

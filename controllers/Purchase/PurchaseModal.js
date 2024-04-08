@@ -45,7 +45,12 @@ export async function handlePurchasePost(req, res) {
 export async function handlePurchaseGet(req, res) {
   try {
     const purchaseData = await Purchase.find({});
-    res.send({ data: purchaseData });
+    const latestPINumber = await CreditNote.findOne().sort({ _id: -1 });
+
+    res.send({
+      data: purchaseData,
+      latestPINumber: latestPINumber.purchaseInvoiceNumber,
+    });
   } catch (e) {
     console.log(e);
   }

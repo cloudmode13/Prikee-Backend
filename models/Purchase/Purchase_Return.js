@@ -11,7 +11,7 @@ const purchaseReturnSchema = new mongoose.Schema({
     vendorName: {
       type: String,
     },
-    purchaseOrderNumber: {
+    purchaseInvoiceNumber: {
       type: String,
     },
     purchaseDate: {
@@ -28,6 +28,8 @@ const purchaseReturnSchema = new mongoose.Schema({
     total: { type: String },
     subTotal: { type: String },
     gst: { type: String },
+    cgst: { type: String },
+    cgstValue: { type: String },
   },
 });
 

@@ -35,6 +35,7 @@ import authRouter from './routes/User/auth.route.js';
 import quoNumRouter from './routes/SalesInvoice/Quo_Number.router.js';
 import paidToCtgyRouter from './routes/Expenses/PaidToCategory_Router.js';
 import creditNoteRouter from './routes/SalesInvoice/CreditNote_Router.js';
+import debitNoteRouter from './routes/Purchase/DebitNote_Router.js';
 
 const app = express();
 app.use(cors());
@@ -110,6 +111,8 @@ app.use('/paymentOut', paymentOutRouter);
 app.use('/purchaseReturn', purchaseReturnRouter);
 
 app.use('/purchaseOrder', purchaseOrderRouter);
+
+app.use('/debitNote', debitNoteRouter);
 
 app.use('/expenses', expensesRouter);
 

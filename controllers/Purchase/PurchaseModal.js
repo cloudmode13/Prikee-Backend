@@ -45,7 +45,7 @@ export async function handlePurchasePost(req, res) {
 export async function handlePurchaseGet(req, res) {
   try {
     const purchaseData = await Purchase.find({});
-    const latestPINumber = await CreditNote.findOne().sort({ _id: -1 });
+    const latestPINumber = await Purchase.findOne().sort({ _id: -1 });
 
     res.send({
       data: purchaseData,

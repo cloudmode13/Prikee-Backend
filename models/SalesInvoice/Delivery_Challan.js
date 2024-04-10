@@ -40,6 +40,8 @@ const deliveryChallanSchema = new mongoose.Schema({
     total: { type: String },
     subTotal: { type: String },
     gst: { type: String },
+    cgst: { type: String },
+    cgstValue: { type: String },
   },
 });
 

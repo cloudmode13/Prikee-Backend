@@ -15,6 +15,8 @@ export async function handleClientPost(req, res) {
     creditLimit,
   } = req.body;
 
+  const userId = req.userId;
+
   const data = {
     name: name,
     mobileNumber: mobileNumber,
@@ -27,6 +29,7 @@ export async function handleClientPost(req, res) {
     shippingAddress: shippingAddress,
     creditPeriod: creditPeriod,
     creditLimit: creditLimit,
+    userId: userId,
   };
 
   try {
@@ -44,8 +47,9 @@ export async function handleClientPost(req, res) {
 }
 
 export async function handleClientGet(req, res) {
+  const userId = req.userId;
   try {
-    const client = await ClientModal.find({});
+    const client = await ClientModal.find({ userId });
     console.log(client);
     res.send({ data: client });
   } catch (e) {
@@ -54,10 +58,12 @@ export async function handleClientGet(req, res) {
 }
 
 export async function handleClientUpdate(req, res) {
+  const userId = req.userId;
   try {
     const updatedClient = await ClientModal.findByIdAndUpdate(
       req.params.id,
       req.body,
+      userId,
       { new: true },
     );
     if (!updatedClient) {
@@ -74,8 +80,13 @@ export async function handleClientUpdate(req, res) {
 }
 
 export async function handleClientDelete(req, res) {
+  const clientId = req.params.id;
+  const userId = req.userId;
   try {
-    const deletedClient = await ClientModal.findByIdAndDelete(req.params.id);
+    const deletedClient = await ClientModal.findByIdAndDelete({
+      clientId,
+      userId,
+    });
 
     if (!deletedClient) {
       return res.status(404).send({ message: 'Client not found' });

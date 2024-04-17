@@ -5,15 +5,16 @@ import {
   handleClientUpdate,
   handleClientDelete,
 } from '../../controllers/Clients/clientsModal.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/', handleClientPost);
+router.post('/', authenticateToken, handleClientPost);
 
-router.get('/', handleClientGet);
+router.get('/', authenticateToken, handleClientGet);
 
-router.put('/:id', handleClientUpdate);
+router.put('/:id', authenticateToken, handleClientUpdate);
 
-router.delete('/:id', handleClientDelete);
+router.delete('/:id', authenticateToken, handleClientDelete);
 
 export default router;

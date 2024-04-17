@@ -36,9 +36,11 @@ import quoNumRouter from './routes/SalesInvoice/Quo_Number.router.js';
 import paidToCtgyRouter from './routes/Expenses/PaidToCategory_Router.js';
 import creditNoteRouter from './routes/SalesInvoice/CreditNote_Router.js';
 import debitNoteRouter from './routes/Purchase/DebitNote_Router.js';
+import { errorHandlerMiddleware } from './utils/error.js';
 
 const app = express();
 app.use(cors());
+
 app.use(express.json());
 app.use(express.static('product'));
 app.use(express.static('service'));
@@ -121,6 +123,8 @@ app.use('/paidToCtgyRouter', paidToCtgyRouter);
 app.use('/cashBank', cashBankRouter);
 
 app.use('/auth', authRouter);
+
+app.use(errorHandlerMiddleware);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

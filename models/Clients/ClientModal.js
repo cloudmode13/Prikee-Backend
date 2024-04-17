@@ -37,7 +37,11 @@ const clientModalSchema = new mongoose.Schema(
     creditLimit: {
       type: String,
     },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
   },
   { timestamps: true },
 );

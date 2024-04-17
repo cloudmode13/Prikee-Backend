@@ -15,7 +15,7 @@ export async function handleClientPost(req, res) {
     creditLimit,
   } = req.body;
 
-  const userId = req.userId;
+  const userId = req.decodedToken.userId;
 
   const data = {
     name: name,
@@ -47,7 +47,8 @@ export async function handleClientPost(req, res) {
 }
 
 export async function handleClientGet(req, res) {
-  const userId = req.userId;
+  console.log(req);
+  const userId = req.decodedToken.userId;
   try {
     const client = await ClientModal.find({ userId });
     console.log(client);
@@ -58,7 +59,7 @@ export async function handleClientGet(req, res) {
 }
 
 export async function handleClientUpdate(req, res) {
-  const userId = req.userId;
+  const userId = req.decodedToken.userId;
   try {
     const updatedClient = await ClientModal.findByIdAndUpdate(
       req.params.id,
@@ -81,7 +82,7 @@ export async function handleClientUpdate(req, res) {
 
 export async function handleClientDelete(req, res) {
   const clientId = req.params.id;
-  const userId = req.userId;
+  const userId = req.decodedToken.userId;
   try {
     const deletedClient = await ClientModal.findByIdAndDelete({
       clientId,

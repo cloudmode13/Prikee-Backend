@@ -15,7 +15,7 @@ export async function handleClientPost(req, res) {
     creditLimit,
   } = req.body;
 
-  const userId = req.decodedToken.userId;
+  // const userId = req.decodedToken.userId;
 
   const data = {
     name: name,
@@ -47,11 +47,11 @@ export async function handleClientPost(req, res) {
 }
 
 export async function handleClientGet(req, res) {
-  console.log(req);
-  const userId = req.decodedToken.userId;
+  console.log('clientreq', req.headers);
+  // const userId = req.decodedToken.userId;
   try {
-    const client = await ClientModal.find({ userId });
-    console.log(client);
+    const client = await ClientModal.find({});
+    // console.log(client);
     res.send({ data: client });
   } catch (e) {
     console.log(e);
@@ -59,12 +59,12 @@ export async function handleClientGet(req, res) {
 }
 
 export async function handleClientUpdate(req, res) {
-  const userId = req.decodedToken.userId;
+  // const userId = req.decodedToken.userId;
   try {
     const updatedClient = await ClientModal.findByIdAndUpdate(
       req.params.id,
       req.body,
-      userId,
+      // userId,
       { new: true },
     );
     if (!updatedClient) {
@@ -82,11 +82,11 @@ export async function handleClientUpdate(req, res) {
 
 export async function handleClientDelete(req, res) {
   const clientId = req.params.id;
-  const userId = req.decodedToken.userId;
+  // const userId = req.decodedToken.userId;
   try {
     const deletedClient = await ClientModal.findByIdAndDelete({
       clientId,
-      userId,
+      // userId,
     });
 
     if (!deletedClient) {

@@ -1,33 +1,19 @@
 import jwt from 'jsonwebtoken';
 import { errorHandler } from '../utils/error.js';
-
-// export const authenticateToken = (req, res, next) => {
-//   console.log(req);
-//   const token = req.cookies.access_token;
-//   console.log(token);
-//   if (!token) {
-//     return next(errorHandler(401, 'Unauthorized'));
-//   }
-
-//   jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-//     if (err) {
-//       return next(errorHandler(403, 'Invalid token'));
-//     }
-//     req.decodedToken = decodedToken;
-//     next();
-//   });
-// };
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const authenticateToken = (req, res, next) => {
-  console.log(req.headers.authorization);
+  console.log('authmiddreq', req.headers);
   const token = req.headers.authorization;
-  console.log(token);
+  let secretKey = process.env.JWT_SECRET;
+
+  // console.log(token);
   if (!token) {
     return next(errorHandler(401, 'Unauthorized'));
   }
   try {
-    // Verify token
-    const decoded = jwt.verify(token, 'secret');
+    const decoded = jwt.verify(token, secretKey);
     req.user = decoded.user;
     next();
   } catch (error) {

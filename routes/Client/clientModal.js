@@ -8,13 +8,14 @@ import {
 import { authenticateToken } from '../../middlewares/authMiddleware.js';
 
 const router = express.Router();
+router.use(authenticateToken);
 
-router.post('/', authenticateToken, handleClientPost);
+router.post('/', handleClientPost);
 
-router.get('/', authenticateToken, handleClientGet);
+router.get('/', handleClientGet);
 
-router.put('/:id', authenticateToken, handleClientUpdate);
+router.put('/:id', handleClientUpdate);
 
-router.delete('/:id', authenticateToken, handleClientDelete);
+router.delete('/:id', handleClientDelete);
 
 export default router;

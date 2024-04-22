@@ -2,6 +2,10 @@ import User from '../../models/User/user.js';
 import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../../utils/error.js';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const secretKey = process.env.JWT_SECRET;
 
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
@@ -43,7 +47,6 @@ export const signup = async (req, res, next) => {
 // };
 
 export const signin = async (req, res, next) => {
-  console.log(req.body);
   const { email, password } = req.body;
   try {
     const validUser = await User.findOne({ email });
@@ -51,9 +54,10 @@ export const signin = async (req, res, next) => {
     const validPassword = bcryptjs.compareSync(password, validUser.password);
     if (!validPassword) return next(errorHandler(401, 'Wrong credentials'));
 
-    const token = jwt.sign({ user: { id: validUser._id } }, 'secret', {
+    const token = jwt.sign({ user: { id: validUser._id } }, secretKey, {
       expiresIn: '1h',
     });
+    res.setHeader('Authorization', `Bearer ${token}`);
     res.status(200).json({ token });
   } catch (error) {
     next(error);

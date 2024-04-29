@@ -5,7 +5,10 @@ import {
   handlePaymentOutUpdate,
   handlePaymentOutDelete,
 } from '../../controllers/Purchase/Payment_Out.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
+
 const router = express.Router();
+router.use(authenticateToken);
 
 router.post('/', handlePaymentOutPost);
 

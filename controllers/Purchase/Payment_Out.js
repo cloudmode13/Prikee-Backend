@@ -19,6 +19,8 @@ export async function handlePaymentOutPost(req, res) {
     purchasedDescription,
   } = req.body;
 
+  const userId = req.user.id;
+
   const data = {
     vendorName,
     POVendorName,
@@ -35,6 +37,7 @@ export async function handlePaymentOutPost(req, res) {
     PODate,
     purchasedNumber,
     purchasedDate,
+    userId: userId,
   };
 
   try {
@@ -53,8 +56,9 @@ export async function handlePaymentOutPost(req, res) {
 }
 
 export async function handlePaymentOutGet(req, res) {
+  const userId = req.user.id;
   try {
-    const paymentData = await PaymentOut.find({});
+    const paymentData = await PaymentOut.find({ userId: userId });
     res.send({ data: paymentData });
   } catch (e) {
     console.log(e);
@@ -62,10 +66,12 @@ export async function handlePaymentOutGet(req, res) {
 }
 
 export async function handlePaymentOutUpdate(req, res) {
+  const userId = req.user.id;
   try {
     const updatedPaymentOut = await PaymentOut.findByIdAndUpdate(
       req.params.id,
       req.body,
+      { userId: userId },
       { new: true },
     );
     if (!updatedPaymentOut) {
@@ -82,8 +88,12 @@ export async function handlePaymentOutUpdate(req, res) {
 }
 
 export async function handlePaymentOutDelete(req, res) {
+  const userId = req.user.id;
   try {
-    const deletedPaymentOut = await PaymentOut.findByIdAndDelete(req.params.id);
+    const deletedPaymentOut = await PaymentOut.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedPaymentOut) {
       return res.status(404).send({ message: 'PaymentOut not found' });

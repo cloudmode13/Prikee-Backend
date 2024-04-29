@@ -4,7 +4,10 @@ import {
   handleCustomerNameGet,
   handleCustomerNameDelete,
 } from '../../controllers/SalesInvoice/Create_CustomerName.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
+
 const router = express.Router();
+router.use(authenticateToken);
 
 router.post('/', handleCustomerNamePost);
 

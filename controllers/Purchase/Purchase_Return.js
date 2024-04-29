@@ -3,11 +3,12 @@ import Purchase from '../../models/Purchase/PurchaseModal.js';
 
 export async function handlePRPost(req, res) {
   const { returnDate, reason, returnData } = req.body;
-
+  const userId = req.user.id;
   const data = {
     returnDate,
     reason,
     returnData,
+    userId: userId,
   };
 
   try {
@@ -15,6 +16,7 @@ export async function handlePRPost(req, res) {
     if (purchaseReturn) {
       const removedItem = await Purchase.findOneAndDelete({
         _id: returnData._id,
+        userId: userId,
       });
       if (removedItem) {
         res
@@ -33,8 +35,9 @@ export async function handlePRPost(req, res) {
 }
 
 export async function handlePRGet(req, res) {
+  const userId = req.user.id;
   try {
-    const purchaseReturn = await PurchaseReturn.find({});
+    const purchaseReturn = await PurchaseReturn.find({ userId: userId });
     res.send({ data: purchaseReturn });
   } catch (e) {
     console.log(e);
@@ -42,10 +45,12 @@ export async function handlePRGet(req, res) {
 }
 
 export async function handlePRDelete(req, res) {
+  const userId = req.user.id;
   try {
-    const deletedPurchaseReturn = await PurchaseReturn.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedPurchaseReturn = await PurchaseReturn.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedPurchaseReturn) {
       return res.status(404).send({ message: 'SR not found' });

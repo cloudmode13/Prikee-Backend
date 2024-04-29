@@ -2,12 +2,14 @@ import QuoInvItem from '../../models/SalesInvoice/QuoInvItem.js';
 
 export async function handleQuoInvItemPost(req, res) {
   const { itemName, itemCode, salesPrice, salesGst } = req.body;
+  const userId = req.user.id;
 
   const data = {
     itemName,
     itemCode,
     salesPrice,
     salesGst,
+    userId: userId,
   };
 
   try {
@@ -25,8 +27,10 @@ export async function handleQuoInvItemPost(req, res) {
 }
 
 export async function handleQuoInvItemGet(req, res) {
+  const userId = req.user.id;
+
   try {
-    const quoInvItem = await QuoInvItem.find({});
+    const quoInvItem = await QuoInvItem.find({ userId: userId });
     res.send({ data: quoInvItem });
   } catch (e) {
     console.log(e);
@@ -34,10 +38,13 @@ export async function handleQuoInvItemGet(req, res) {
 }
 
 export async function handleQuoInvItemUpdate(req, res) {
+  const userId = req.user.id;
+
   try {
     const updatedQuoInvItem = await QuoInvItem.findByIdAndUpdate(
       req.params.id,
       req.body,
+      { userId: userId },
       { new: true },
     );
     if (!updatedQuoInvItem) {
@@ -54,8 +61,13 @@ export async function handleQuoInvItemUpdate(req, res) {
 }
 
 export async function handleQuoInvItemDelete(req, res) {
+  const userId = req.user.id;
+
   try {
-    const deletedQuoInvItem = await QuoInvItem.findByIdAndDelete(req.params.id);
+    const deletedQuoInvItem = await QuoInvItem.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedQuoInvItem) {
       return res.status(404).send({ message: 'ServiceItem not found' });

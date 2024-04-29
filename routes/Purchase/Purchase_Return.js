@@ -4,7 +4,10 @@ import {
   handlePRGet,
   handlePRDelete,
 } from '../../controllers/Purchase/Purchase_Return.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
+
 const router = express.Router();
+router.use(authenticateToken);
 
 router.post('/', handlePRPost);
 

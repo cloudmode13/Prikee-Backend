@@ -15,6 +15,11 @@ const quoInvItemSchema = new mongoose.Schema({
   salesGst: {
     type: String,
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 const QuoInvItem = mongoose.model('quoInvItemSchema', quoInvItemSchema);

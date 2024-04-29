@@ -2,8 +2,11 @@ import CustomerName from '../../models/SalesInvoice/Create_CustomerName.js';
 
 export async function handleCustomerNamePost(req, res) {
   const { customerName } = req.body;
+  const userId = req.user.id;
+
   const data = {
     customerName: customerName,
+    userId: userId,
   };
   try {
     const customerName = await CustomerName.create(data);
@@ -18,8 +21,10 @@ export async function handleCustomerNamePost(req, res) {
 }
 
 export async function handleCustomerNameGet(req, res) {
+  const userId = req.user.id;
+
   try {
-    const customerName = await CustomerName.find({});
+    const customerName = await CustomerName.find({ userId: userId });
     res.send({ data: customerName });
   } catch (e) {
     console.log(e);
@@ -27,10 +32,13 @@ export async function handleCustomerNameGet(req, res) {
 }
 
 export async function handleCustomerNameDelete(req, res) {
+  const userId = req.user.id;
+
   try {
-    const deletedcustomerName = await CustomerName.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedcustomerName = await CustomerName.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
     if (!deletedcustomerName) {
       return res.status(404).send({ message: 'Category not found' });
     }

@@ -7,8 +7,10 @@ import {
   handleServiceUpdate,
   handleServiceDelete,
 } from '../../controllers/Item/serviceInv.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
 
 const router = express.Router();
+router.use(authenticateToken);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

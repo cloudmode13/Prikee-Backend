@@ -9,6 +9,7 @@ export async function handleDCPost(req, res) {
     termsOfDelivery,
     dcData,
   } = req.body;
+  const userId = req.user.id;
 
   const data = {
     delNoteNo,
@@ -17,6 +18,7 @@ export async function handleDCPost(req, res) {
     destination,
     termsOfDelivery,
     dcData,
+    userId: userId,
   };
 
   try {
@@ -34,8 +36,10 @@ export async function handleDCPost(req, res) {
 }
 
 export async function handleDCGet(req, res) {
+  const userId = req.user.id;
+
   try {
-    const deliveryChallan = await DeliveryChallan.find({});
+    const deliveryChallan = await DeliveryChallan.find({ userId: userId });
 
     const latestDCNumber = await DeliveryChallan.findOne().sort({ _id: -1 });
 
@@ -49,10 +53,13 @@ export async function handleDCGet(req, res) {
 }
 
 export async function handleDCUpdate(req, res) {
+  const userId = req.user.id;
+
   try {
     const updatedDeliveryChallan = await DeliveryChallan.findByIdAndUpdate(
       req.params.id,
       req.body,
+      { userId: userId },
       { new: true },
     );
     if (!updatedDeliveryChallan) {
@@ -69,10 +76,13 @@ export async function handleDCUpdate(req, res) {
 }
 
 export async function handleDCDelete(req, res) {
+  const userId = req.user.id;
+
   try {
-    const deletedDeliveryChallan = await DeliveryChallan.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedDeliveryChallan = await DeliveryChallan.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedDeliveryChallan) {
       return res.status(404).send({ message: 'Party not found' });

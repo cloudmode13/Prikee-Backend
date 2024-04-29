@@ -15,6 +15,7 @@ export async function handleServicePost(req, res) {
     basicServiceSalesPrice,
   } = req.body;
 
+  const userId = req.user.id;
   const imagePath = req.file ? req.file.filename : null;
 
   const data = {
@@ -30,6 +31,7 @@ export async function handleServicePost(req, res) {
     serviceGst,
     imagePath,
     basicServiceSalesPrice,
+    userId: userId,
   };
 
   try {
@@ -47,8 +49,9 @@ export async function handleServicePost(req, res) {
 }
 
 export async function handleServiceGet(req, res) {
+  const userId = req.user.id;
   try {
-    const serviceItem = await Service.find({});
+    const serviceItem = await Service.find({ userId: userId });
     res.send({ data: serviceItem });
   } catch (e) {
     console.log(e);
@@ -56,12 +59,14 @@ export async function handleServiceGet(req, res) {
 }
 
 export async function handleServiceUpdate(req, res) {
+  const userId = req.user.id;
   const imagePath = req.file ? req.file.filename : null;
 
   try {
     const updatedService = await Service.findByIdAndUpdate(
       req.params.id,
       { ...req.body, imagePath },
+      { userId: userId },
       { new: true },
     );
     if (!updatedService) {
@@ -78,8 +83,12 @@ export async function handleServiceUpdate(req, res) {
 }
 
 export async function handleServiceDelete(req, res) {
+  const userId = req.user.id;
   try {
-    const deletedService = await Service.findByIdAndDelete(req.params.id);
+    const deletedService = await Service.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedService) {
       return res.status(404).send({ message: 'ServiceItem not found' });

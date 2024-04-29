@@ -4,7 +4,10 @@ import {
   handleDbnGet,
   handleDbnDelete,
 } from '../../controllers/Purchase/DebitNote_Controller.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
+
 const router = express.Router();
+router.use(authenticateToken);
 
 router.post('/', handleDbnPost);
 

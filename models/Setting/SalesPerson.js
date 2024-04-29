@@ -7,6 +7,11 @@ const salesPersonSchema = new mongoose.Schema({
   designation: {
     type: String,
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 export default mongoose.model('SalesPerson', salesPersonSchema);

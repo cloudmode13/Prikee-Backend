@@ -27,6 +27,8 @@ export async function handleSalesInvoicePost(req, res) {
     paidMode,
   } = req.body;
 
+  const userId = req.user.id;
+
   const data = {
     clientName,
     invoiceNumber,
@@ -46,6 +48,7 @@ export async function handleSalesInvoicePost(req, res) {
     cgstValue,
     subTotal,
     paidMode,
+    userId: userId,
   };
 
   try {
@@ -56,7 +59,6 @@ export async function handleSalesInvoicePost(req, res) {
         const quantity = item.quantity || 0;
         product.openingStock -= quantity;
 
-        // Save the updated product back to the database
         await product.save();
       }
     }
@@ -74,8 +76,10 @@ export async function handleSalesInvoicePost(req, res) {
 }
 
 export async function handleSalesInvoiceGet(req, res) {
+  const userId = req.user.id;
+
   try {
-    const salesInvoice = await SalesInvoice.find({});
+    const salesInvoice = await SalesInvoice.find({ userId: userId });
 
     const latestInvoiceNumber = await SalesInvoice.findOne().sort({ _id: -1 });
 
@@ -89,11 +93,14 @@ export async function handleSalesInvoiceGet(req, res) {
 }
 
 export async function handleSalesInvoiceUpdate(req, res) {
+  const userId = req.user.id;
+
   try {
     const updatedSalesInvoice = await SalesInvoice.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true },
+      { userId: userId },
     );
     if (!updatedSalesInvoice) {
       return res.status(404).send({ message: 'Party not found' });
@@ -109,10 +116,13 @@ export async function handleSalesInvoiceUpdate(req, res) {
 }
 
 export async function handleSalesInvoiceDelete(req, res) {
+  const userId = req.user.id;
+
   try {
-    const deletedSalesInvoice = await SalesInvoice.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedSalesInvoice = await SalesInvoice.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedSalesInvoice) {
       return res.status(404).send({ message: 'Party not found' });

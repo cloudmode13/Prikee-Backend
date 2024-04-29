@@ -4,8 +4,10 @@ import {
   handleCBGet,
   handleCBDelete,
 } from '../../controllers/Cash_Bank/Cash_Bank.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
 
 const router = express.Router();
+router.use(authenticateToken);
 
 router.post('/', handleCBPost);
 router.get('/', handleCBGet);

@@ -19,6 +19,11 @@ const purchaseOrderSchema = new mongoose.Schema({
       quantity: String,
     },
   ],
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 export default mongoose.model('PurchaseOrder', purchaseOrderSchema);

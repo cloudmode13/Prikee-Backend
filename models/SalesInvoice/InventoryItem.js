@@ -15,6 +15,11 @@ const inventoryItemSchema = new mongoose.Schema({
   salesGst: {
     type: String,
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 const InventoryItem = mongoose.model(

@@ -4,15 +4,14 @@ import Product from '../../models/Item/Product.js';
 
 export async function handleSRPost(req, res) {
   const { returnDate, reason, returnData } = req.body;
-  console.log(19, req.body);
+  const userId = req.user.id;
 
   const data = {
     returnDate,
     reason,
     returnData,
+    userId: userId,
   };
-
-  console.log(32, data);
 
   try {
     for (const item of returnData.inventoryItem) {
@@ -30,6 +29,7 @@ export async function handleSRPost(req, res) {
     if (salesReturn) {
       const removedItem = await SalesInvoice.findOneAndDelete({
         _id: returnData._id,
+        userId: userId,
       });
       if (removedItem) {
         res
@@ -38,9 +38,6 @@ export async function handleSRPost(req, res) {
       } else {
         res.status(400).send({ message: 'Item not found in salesData' });
       }
-      // res
-      //   .status(201)
-      //   .send({ message: 'SR created successfully', data: salesReturn });
     } else {
       res.status(400).send({ message: 'SR creation failed' });
     }
@@ -51,8 +48,10 @@ export async function handleSRPost(req, res) {
 }
 
 export async function handleSRGet(req, res) {
+  const userId = req.user.id;
+
   try {
-    const salesReturn = await SalesReturn.find({});
+    const salesReturn = await SalesReturn.find({ userId: userId });
     res.send({ data: salesReturn });
   } catch (e) {
     console.log(e);
@@ -60,10 +59,13 @@ export async function handleSRGet(req, res) {
 }
 
 export async function handleSRDelete(req, res) {
+  const userId = req.user.id;
+
   try {
-    const deletedSalesReturn = await SalesReturn.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedSalesReturn = await SalesReturn.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedSalesReturn) {
       return res.status(404).send({ message: 'SR not found' });

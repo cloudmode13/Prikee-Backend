@@ -5,8 +5,10 @@ import {
   handleQuoInvItemUpdate,
   handleQuoInvItemDelete,
 } from '../../controllers/SalesInvoice/QuoInvItem.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
 
 const router = express.Router();
+router.use(authenticateToken);
 
 router.post('/', handleQuoInvItemPost);
 

@@ -7,6 +7,11 @@ const quoNumSchema = new mongoose.Schema({
   newNumber: {
     type: String,
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 export default mongoose.model('QuoNum', quoNumSchema);

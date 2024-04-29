@@ -19,6 +19,8 @@ export async function handleQuotationPost(req, res) {
     cgstValue,
   } = req.body;
 
+  const userId = req.user.id;
+
   const data = {
     clientName,
     quotationNumber,
@@ -35,6 +37,7 @@ export async function handleQuotationPost(req, res) {
     gst,
     cgst,
     cgstValue,
+    userId: userId,
   };
 
   try {
@@ -52,8 +55,10 @@ export async function handleQuotationPost(req, res) {
 }
 
 export async function handleQuotationGet(req, res) {
+  const userId = req.user.id;
+
   try {
-    const quotation = await Quotation.find({});
+    const quotation = await Quotation.find({ userId: userId });
     const latestQuoNumber = await Quotation.findOne().sort({ _id: -1 });
     console.log(58, latestQuoNumber.quotationNumber);
     res.send({
@@ -66,11 +71,14 @@ export async function handleQuotationGet(req, res) {
 }
 
 export async function handleQuotationUpdate(req, res) {
+  const userId = req.user.id;
+
   try {
     const updatedQuotation = await Quotation.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true },
+      { userId: userId },
     );
     if (!updatedQuotation) {
       return res.status(404).send({ message: 'Party not found' });
@@ -86,8 +94,13 @@ export async function handleQuotationUpdate(req, res) {
 }
 
 export async function handleQuotationDelete(req, res) {
+  const userId = req.user.id;
+
   try {
-    const deletedQuotation = await Quotation.findByIdAndDelete(req.params.id);
+    const deletedQuotation = await Quotation.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedQuotation) {
       return res.status(404).send({ message: 'Party not found' });

@@ -4,16 +4,16 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const authenticateToken = (req, res, next) => {
-  console.log('authmiddreq', req.headers);
-  const token = req.headers.authorization;
+  const token = req.headers.token;
   let secretKey = process.env.JWT_SECRET;
 
-  // console.log(token);
   if (!token) {
     return next(errorHandler(401, 'Unauthorized'));
   }
   try {
-    const decoded = jwt.verify(token, secretKey);
+    const token1 = token.split(' ')[1];
+
+    const decoded = jwt.verify(token1, secretKey);
     req.user = decoded.user;
     next();
   } catch (error) {

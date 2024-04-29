@@ -40,6 +40,11 @@ const serviceItemSchema = new mongoose.Schema({
   imagePath: {
     type: String,
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 const Service = mongoose.model('serviceItemSchema', serviceItemSchema);

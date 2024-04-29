@@ -16,6 +16,8 @@ export async function handleOrganisationPost(req, res) {
     website,
   } = req.body;
 
+  const userId = req.user.id;
+
   const imagePath = req.file ? req.file.filename : null;
   const data = {
     organisationName,
@@ -31,6 +33,7 @@ export async function handleOrganisationPost(req, res) {
     panNumber,
     imagePath,
     website,
+    userId: userId,
   };
   try {
     const organisation = await Organisation.create(data);
@@ -45,8 +48,10 @@ export async function handleOrganisationPost(req, res) {
 }
 
 export async function handleOrganisationGet(req, res) {
+  const userId = req.user.id;
+
   try {
-    const organisation = await Organisation.find({});
+    const organisation = await Organisation.find({ userId: userId });
     return res.status(200).send({ data: organisation });
   } catch (e) {
     console.log(e);
@@ -55,6 +60,8 @@ export async function handleOrganisationGet(req, res) {
 }
 
 export async function handleOrganisationEdit(req, res) {
+  const userId = req.user.id;
+
   const imagePath = req.file ? req.file.filename : null;
 
   try {
@@ -62,6 +69,7 @@ export async function handleOrganisationEdit(req, res) {
       req.params.id,
       { ...req.body, imagePath },
       { new: true },
+      { userId: userId },
     );
     return res
       .status(200)
@@ -72,10 +80,13 @@ export async function handleOrganisationEdit(req, res) {
 }
 
 export async function handleOrganisationDelete(req, res) {
+  const userId = req.user.id;
+
   try {
-    const deletedorganisation = await Organisation.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedorganisation = await Organisation.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
     if (!deletedorganisation) {
       return res.status(404).send({ message: 'Organistion not found' });
     }

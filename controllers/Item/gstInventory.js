@@ -2,9 +2,11 @@ import GSTInventory from '../../models/Item/GSTInventory.js';
 
 export async function handleGSTInvtPost(req, res) {
   const { invGST } = req.body;
+  const userId = req.user.id;
 
   const data = {
     invGST,
+    userId: userId,
   };
 
   try {
@@ -20,8 +22,9 @@ export async function handleGSTInvtPost(req, res) {
 }
 
 export async function handleGSTInvtGet(req, res) {
+  const userId = req.user.id;
   try {
-    const invGST = await GSTInventory.find({});
+    const invGST = await GSTInventory.find({ userId: userId });
     res.send({ data: invGST });
   } catch (e) {
     console.log(e);
@@ -29,8 +32,12 @@ export async function handleGSTInvtGet(req, res) {
 }
 
 export async function handleGSTInvtDelete(req, res) {
+  const userId = req.user.id;
   try {
-    const deletedInvGST = await GSTInventory.findByIdAndDelete(req.params.id);
+    const deletedInvGST = await GSTInventory.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedInvGST) {
       return res.status(404).send({ message: 'Category not found' });

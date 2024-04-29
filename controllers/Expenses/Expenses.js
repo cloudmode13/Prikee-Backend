@@ -2,7 +2,7 @@ import Expenses from '../../models/Expenses/Expenses.js';
 
 export async function handleExpensesPost(req, res) {
   const { description, paidTo, amount, remarks, date, paidMode } = req.body;
-
+  const userId = req.user.id;
   const data = {
     description,
     paidTo,
@@ -10,6 +10,7 @@ export async function handleExpensesPost(req, res) {
     amount,
     remarks,
     paidMode,
+    userId: userId,
   };
 
   try {
@@ -29,8 +30,9 @@ export async function handleExpensesPost(req, res) {
 }
 
 export async function handleExpensesGet(req, res) {
+  const userId = req.user.id;
   try {
-    const expensesData = await Expenses.find({});
+    const expensesData = await Expenses.find({ userId: userId });
     res.send({ data: expensesData });
   } catch (error) {
     console.log(error);
@@ -39,8 +41,11 @@ export async function handleExpensesGet(req, res) {
 }
 
 export async function handleExpensesDelete(req, res) {
+  const userId = req.user.id;
   try {
-    const deleteExpensesData = await Expenses.findByIdAndDelete(req.params.id);
+    const deleteExpensesData = await Expenses.findByIdAndDelete(req.params.id, {
+      userId: userId,
+    });
     if (!deleteExpensesData) {
       return res.status(404).send({ message: 'Record not Found' });
     }

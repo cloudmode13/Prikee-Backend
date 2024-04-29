@@ -5,7 +5,10 @@ import {
   handlePOUpdate,
   handlePODelete,
 } from '../../controllers/Purchase/Pur_Order.Controller.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
+
 const router = express.Router();
+router.use(authenticateToken);
 
 router.post('/', handlePOPost);
 

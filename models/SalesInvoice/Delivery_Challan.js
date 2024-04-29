@@ -43,6 +43,11 @@ const deliveryChallanSchema = new mongoose.Schema({
     cgst: { type: String },
     cgstValue: { type: String },
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 export default mongoose.model('DeliveryChallan', deliveryChallanSchema);

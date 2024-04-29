@@ -2,9 +2,11 @@ import OthersInventory from '../../models/Item/OthersInventory.js';
 
 export async function handleOthersInvtPost(req, res) {
   const { othersName } = req.body;
+  const userId = req.user.id;
 
   const data = {
     othersName: othersName,
+    userId: userId,
   };
 
   try {
@@ -20,8 +22,9 @@ export async function handleOthersInvtPost(req, res) {
 }
 
 export async function handleOthersInvtGet(req, res) {
+  const userId = req.user.id;
   try {
-    const othersInventory = await OthersInventory.find({});
+    const othersInventory = await OthersInventory.find({ userId: userId });
     res.send({ data: othersInventory });
   } catch (e) {
     console.log(e);
@@ -29,10 +32,12 @@ export async function handleOthersInvtGet(req, res) {
 }
 
 export async function handleOthersInvtDelete(req, res) {
+  const userId = req.user.id;
   try {
-    const deletedOthersInvt = await OthersInventory.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedOthersInvt = await OthersInventory.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedOthersInvt) {
       return res.status(404).send({ message: 'Category not found' });

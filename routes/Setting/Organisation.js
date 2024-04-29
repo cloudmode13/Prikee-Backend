@@ -7,8 +7,10 @@ import {
   handleOrganisationEdit,
   handleOrganisationDelete,
 } from '../../controllers/Setting/Organisation.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
 
 const router = express.Router();
+router.use(authenticateToken);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

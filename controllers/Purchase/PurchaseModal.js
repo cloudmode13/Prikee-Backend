@@ -13,6 +13,7 @@ export async function handlePurchasePost(req, res) {
     cgst,
     cgstValue,
   } = req.body;
+  const userId = req.user.id;
 
   const data = {
     vendorName,
@@ -25,6 +26,7 @@ export async function handlePurchasePost(req, res) {
     total,
     cgst,
     cgstValue,
+    userId: userId,
   };
 
   try {
@@ -43,8 +45,9 @@ export async function handlePurchasePost(req, res) {
 }
 
 export async function handlePurchaseGet(req, res) {
+  const userId = req.user.id;
   try {
-    const purchaseData = await Purchase.find({});
+    const purchaseData = await Purchase.find({ userId: userId });
     const latestPINumber = await Purchase.findOne().sort({ _id: -1 });
 
     res.send({
@@ -57,10 +60,12 @@ export async function handlePurchaseGet(req, res) {
 }
 
 export async function handlePurchaseUpdate(req, res) {
+  const userId = req.user.id;
   try {
     const updatedPurchaseData = await Purchase.findByIdAndUpdate(
       req.params.id,
       req.body,
+      { userId: userId },
       { new: true },
     );
     if (!updatedPurchaseData) {
@@ -77,8 +82,12 @@ export async function handlePurchaseUpdate(req, res) {
 }
 
 export async function handlePurchaseDelete(req, res) {
+  const userId = req.user.id;
   try {
-    const deletedPurchaseData = await Purchase.findByIdAndDelete(req.params.id);
+    const deletedPurchaseData = await Purchase.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedPurchaseData) {
       return res.status(404).send({ message: 'PurchaseData not found' });

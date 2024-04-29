@@ -43,6 +43,11 @@ const quotationSchema = new mongoose.Schema({
   gst: { type: String },
   cgst: { type: String },
   cgstValue: { type: String },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 export default mongoose.model('Quotation', quotationSchema);

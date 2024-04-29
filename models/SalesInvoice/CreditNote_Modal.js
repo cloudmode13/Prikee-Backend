@@ -41,6 +41,11 @@ const cdnReturnSchema = new mongoose.Schema({
       cgstValue: { type: String },
     },
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 export default mongoose.model('CreditNote', cdnReturnSchema);

@@ -3,18 +3,19 @@ import CreditNote from '../../models/SalesInvoice/CreditNote_Modal.js';
 export async function handleCdnPost(req, res) {
   const { cdnNum, cdnDate, customerNotes, termsandconditions, returnData } =
     req.body;
-  console.log('re', req.body);
+  const userId = req.user.id;
+
   const data = {
     cdnNum,
     cdnDate,
     customerNotes,
     termsandconditions,
     returnData,
+    userId: userId,
   };
-  console.log('data', data);
+
   try {
     const creditNote = await CreditNote.create(data);
-    console.log('cno', creditNote);
     if (creditNote) {
       res
         .status(201)
@@ -29,8 +30,10 @@ export async function handleCdnPost(req, res) {
 }
 
 export async function handleCdnGet(req, res) {
+  const userId = req.user.id;
+
   try {
-    const creditNote = await CreditNote.find({});
+    const creditNote = await CreditNote.find({ userId: userId });
     const latestCdnNumber = await CreditNote.findOne().sort({ _id: -1 });
 
     res.send({ data: creditNote, latestCdnNumber: latestCdnNumber.cdnNum });
@@ -40,10 +43,13 @@ export async function handleCdnGet(req, res) {
 }
 
 export async function handleCdnDelete(req, res) {
+  const userId = req.user.id;
+
   try {
-    const deletedCreditNoteReturn = await CreditNote.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedCreditNoteReturn = await CreditNote.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedCreditNoteReturn) {
       return res.status(404).send({ message: 'CDN not found' });

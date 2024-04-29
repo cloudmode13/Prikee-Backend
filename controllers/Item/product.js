@@ -8,7 +8,6 @@ export async function handleProductPost(req, res) {
     category,
     itemCode,
     itemDescription,
-    // hsn,
     unit,
     openingStock,
     date,
@@ -24,6 +23,7 @@ export async function handleProductPost(req, res) {
   } = req.body;
 
   const imagePath = req.file ? req.file.filename : null;
+  const userId = req.user.id;
 
   try {
     const data = {
@@ -32,7 +32,6 @@ export async function handleProductPost(req, res) {
       category,
       itemCode,
       itemDescription,
-      // hsn,
       unit,
       openingStock,
       date,
@@ -46,6 +45,7 @@ export async function handleProductPost(req, res) {
       imagePath,
       basicSalesPrice,
       basicPurchasePrice,
+      userId: userId,
     };
 
     const productItem = await Product.create(data);
@@ -62,8 +62,9 @@ export async function handleProductPost(req, res) {
 }
 
 export async function handleProductGet(req, res) {
+  const userId = req.user.id;
   try {
-    const productItem = await Product.find({});
+    const productItem = await Product.find({ userId: userId });
     res.send({ data: productItem });
   } catch (e) {
     console.log(e);
@@ -72,17 +73,17 @@ export async function handleProductGet(req, res) {
 
 export async function handleProductUpdate(req, res) {
   let updateData = { ...req.body };
+  const userId = req.user.id;
 
   if (req.file) {
-    // If a new file is uploaded, include imagePath in the update
     updateData.imagePath = req.file.filename;
   }
-  // const imagePath = req.file ? req.file.filename : null;
-  // console.log('upd', imagePath, req.body);
+
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       updateData,
+      { userId: userId },
       { new: true },
     );
     if (!updatedProduct) {
@@ -99,8 +100,12 @@ export async function handleProductUpdate(req, res) {
 }
 
 export async function handleProductDelete(req, res) {
+  const userId = req.user.id;
   try {
-    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+    const deletedProduct = await Product.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedProduct) {
       return res.status(404).send({ message: 'Party not found' });

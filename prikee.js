@@ -37,10 +37,10 @@ import paidToCtgyRouter from './routes/Expenses/PaidToCategory_Router.js';
 import creditNoteRouter from './routes/SalesInvoice/CreditNote_Router.js';
 import debitNoteRouter from './routes/Purchase/DebitNote_Router.js';
 import { errorHandlerMiddleware } from './utils/error.js';
+import authenRouter from './routes/User/user.route.js';
 
 const app = express();
 app.use(cors());
-
 app.use(express.json());
 app.use(express.static('product'));
 app.use(express.static('service'));
@@ -59,6 +59,10 @@ mongoose
   .catch((e) => console.log(e));
 
 const db = mongoose.connection;
+
+app.use('/auth', authRouter);
+
+app.use('/authen', authenRouter);
 
 app.use('/client', clientRouter);
 
@@ -121,8 +125,6 @@ app.use('/expenses', expensesRouter);
 app.use('/paidToCtgyRouter', paidToCtgyRouter);
 
 app.use('/cashBank', cashBankRouter);
-
-app.use('/auth', authRouter);
 
 app.use(errorHandlerMiddleware);
 

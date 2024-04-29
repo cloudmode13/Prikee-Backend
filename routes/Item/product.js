@@ -8,6 +8,7 @@ import {
   handleProductUpdate,
   handleProductDelete,
 } from '../../controllers/Item/product.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
 
 const app = express();
 
@@ -26,6 +27,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const router = express.Router();
+router.use(authenticateToken);
 
 router.post('/', upload.single('productImage'), handleProductPost);
 

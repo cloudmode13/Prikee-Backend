@@ -2,9 +2,10 @@ import CategoryService from '../../models/Item/SrvCategory.js';
 
 export async function handleCatagorySrvPost(req, res) {
   const { categoryNameInv } = req.body;
-
+  const userId = req.user.id;
   const data = {
     categoryNameInv: categoryNameInv,
+    userId: userId,
   };
 
   try {
@@ -20,8 +21,10 @@ export async function handleCatagorySrvPost(req, res) {
 }
 
 export async function handleCatagorySrvGet(req, res) {
+  const userId = req.user.id;
+
   try {
-    const categoryInventory = await CategoryService.find({});
+    const categoryInventory = await CategoryService.find({ userId: userId });
     res.send({ data: categoryInventory });
   } catch (e) {
     console.log(e);
@@ -29,10 +32,12 @@ export async function handleCatagorySrvGet(req, res) {
 }
 
 export async function handleCategorySrvDelete(req, res) {
+  const userId = req.user.id;
   try {
-    const deletedCategorySrv = await CategoryService.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedCategorySrv = await CategoryService.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedCategorySrv) {
       return res.status(404).send({ message: 'Category not found' });

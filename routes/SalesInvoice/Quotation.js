@@ -5,7 +5,10 @@ import {
   handleQuotationUpdate,
   handleQuotationDelete,
 } from '../../controllers/SalesInvoice/Quotation.js';
+import { authenticateToken } from '../../middlewares/authMiddleware.js';
+
 const router = express.Router();
+router.use(authenticateToken);
 
 router.post('/', handleQuotationPost);
 

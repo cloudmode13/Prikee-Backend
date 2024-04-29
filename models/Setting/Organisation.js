@@ -40,6 +40,11 @@ const organisationSchema = new mongoose.Schema({
   website: {
     type: String,
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 export default mongoose.model('Organisation', organisationSchema);

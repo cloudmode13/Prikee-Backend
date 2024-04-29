@@ -2,9 +2,10 @@ import CreateCategory from '../../models/Clients/CreateCategory.js';
 
 export async function handleCatagoryPost(req, res) {
   const { categoryName } = req.body;
-
+  const userId = req.user.id;
   const data = {
     categoryName: categoryName,
+    userId: userId,
   };
 
   try {
@@ -20,8 +21,9 @@ export async function handleCatagoryPost(req, res) {
 }
 
 export async function handleCatagoryGet(req, res) {
+  const userId = req.user.id;
   try {
-    const createCategory = await CreateCategory.find({});
+    const createCategory = await CreateCategory.find({ userId: userId });
     res.send({ data: createCategory });
   } catch (e) {
     console.log(e);
@@ -29,9 +31,11 @@ export async function handleCatagoryGet(req, res) {
 }
 
 export async function handleCategoryDelete(req, res) {
+  const userId = req.user.id;
   try {
     const deletedCategory = await CreateCategory.findByIdAndDelete(
       req.params.id,
+      { userId: userId },
     );
 
     if (!deletedCategory) {

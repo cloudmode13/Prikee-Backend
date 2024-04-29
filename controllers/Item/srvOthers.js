@@ -2,9 +2,11 @@ import SrvOthersInv from '../../models/Item/SrvOthers.js';
 
 export async function handleSrvOthersPost(req, res) {
   const { serviceOthersName } = req.body;
+  const userId = req.user.id;
 
   const data = {
     serviceOthersName: serviceOthersName,
+    userId: userId,
   };
 
   try {
@@ -20,8 +22,9 @@ export async function handleSrvOthersPost(req, res) {
 }
 
 export async function handleSrvOthersGet(req, res) {
+  const userId = req.user.id;
   try {
-    const srvOthersInv = await SrvOthersInv.find({});
+    const srvOthersInv = await SrvOthersInv.find({ userId: userId });
     res.send({ data: srvOthersInv });
   } catch (e) {
     console.log(e);
@@ -29,10 +32,12 @@ export async function handleSrvOthersGet(req, res) {
 }
 
 export async function handleSrvOthersDelete(req, res) {
+  const userId = req.user.id;
   try {
-    const deletedOthersSrv = await SrvOthersInv.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedOthersSrv = await SrvOthersInv.findByIdAndDelete({
+      _id: req.params.id,
+      userId: userId,
+    });
 
     if (!deletedOthersSrv) {
       return res.status(404).send({ message: 'Category not found' });

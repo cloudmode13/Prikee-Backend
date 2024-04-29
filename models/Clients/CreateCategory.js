@@ -1,12 +1,14 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const createCategorySchema = new mongoose.Schema(
-  {
-    categoryName: {
-      type: String,
-    },
-  }
- 
-);
+const createCategorySchema = new mongoose.Schema({
+  categoryName: {
+    type: String,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+});
 
-export default mongoose.model("CreateCategory", createCategorySchema);
+export default mongoose.model('CreateCategory', createCategorySchema);

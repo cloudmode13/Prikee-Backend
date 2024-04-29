@@ -2,9 +2,10 @@ import CategoryInventory from '../../models/Item/CategoryInventory.js';
 
 export async function handleCatagoryInvtPost(req, res) {
   const { categoryNameInv } = req.body;
-
+  const userId = req.user.id;
   const data = {
     categoryNameInv: categoryNameInv,
+    userId: userId,
   };
 
   try {
@@ -20,8 +21,9 @@ export async function handleCatagoryInvtPost(req, res) {
 }
 
 export async function handleCatagoryInvtGet(req, res) {
+  const userId = req.user.id;
   try {
-    const categoryInventory = await CategoryInventory.find({});
+    const categoryInventory = await CategoryInventory.find({ userId: userId });
     res.send({ data: categoryInventory });
   } catch (e) {
     console.log(e);
@@ -29,9 +31,11 @@ export async function handleCatagoryInvtGet(req, res) {
 }
 
 export async function handleCategoryInvtDelete(req, res) {
+  const userId = req.user.id;
   try {
     const deletedCategoryInvt = await CategoryInventory.findByIdAndDelete(
       req.params.id,
+      { userId: userId },
     );
 
     if (!deletedCategoryInvt) {

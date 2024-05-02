@@ -14,7 +14,7 @@ router.use(authenticateToken);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'service/ServiceImages');
+    cb(null, 'Services/Images');
   },
   filename: function (req, file, cb) {
     cb(

@@ -43,7 +43,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static('product'));
-app.use(express.static('service'));
+app.use(express.static('Services'));
 app.use(express.static('Organisation'));
 
 const port = process.env.PORT || 7000;

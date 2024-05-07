@@ -9,7 +9,7 @@ import createCategoryRouter from './routes/Client/createCategory.js';
 import productRouter from './routes/Item/product.js';
 import createInvtRouter from './routes/Item/categoryInventory.js';
 import othersInvtRouter from './routes/Item/othersInventory.js';
-import gstInvtRouter from './routes/Item/gstInventory.js';
+import gstInvtRouter from './routes/Setting/gstInventory.js';
 import serviceInvtRouter from './routes/Item/serviceInv.js';
 import createSrvRouter from './routes/Item/SrvCategory.js';
 import othersSrvRouter from './routes/Item/SrvOthers.js';

@@ -1,4 +1,4 @@
-import GSTInventory from '../../models/Item/GSTInventory.js';
+import GSTInventory from '../../models/Setting/GSTInventory.js';
 
 export async function handleGSTInvtPost(req, res) {
   const { invGST } = req.body;

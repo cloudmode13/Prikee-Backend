@@ -3,7 +3,7 @@ import {
   handleGSTInvtPost,
   handleGSTInvtGet,
   handleGSTInvtDelete,
-} from '../../controllers/Item/gstInventory.js';
+} from '../../controllers/Setting/gstInventory.js';
 import { authenticateToken } from '../../middlewares/authMiddleware.js';
 
 const router = express.Router();
